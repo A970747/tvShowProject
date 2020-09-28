@@ -65,10 +65,12 @@ class ShowGenerator extends Component {
     let displayArray = [...this.state.displayArray];
     if(displayArray.length == 0) {
       response.forEach((each, index) => { if(index < 30) displayArray.push(each)})
-  }
+    }
+    let storedDisplay = displayArray;
 
     this.setState({
       displayArray,
+      storedDisplay,
     }, () => this.updateFilters());
   }
 
@@ -104,10 +106,12 @@ class ShowGenerator extends Component {
     }
 
     apiData.forEach(item => displayArray.push(item));
+    let storedDisplay = displayArray;
 
     this.setState({
       page,
       displayArray,
+      storedDisplay,
     })
   }
 
@@ -132,9 +136,7 @@ class ShowGenerator extends Component {
   }
 
   filterData = () => {
-    console.log(this.state.displayArray, this.state.apiData);
-    //let data = [...this.state.displayArray];
-    let data = [...this.state.apiData];
+    let data = [...this.state.storedDisplay];
     let filterObj = {...this.state.filterArray};
     for(let [key, value] of Object.entries(filterObj))  {
       data = data.filter( data => this.searchTree(key, value, data));
@@ -143,6 +145,14 @@ class ShowGenerator extends Component {
     this.setState({
       displayArray: data,
     })
+  }
+
+  resetDisplay = () => {
+    let displayArray = [...this.state.storedDisplay] 
+
+    this.setState({
+      displayArray,
+    });
   }
 
   searchTree = (filterKey, filterValue, searchObject) => {
@@ -186,10 +196,12 @@ class ShowGenerator extends Component {
   setFilterArray = (arrayFromSidebar) => {
     let filterArray = arrayFromSidebar
 
-    this.setState(
-      {
-        filterArray
-      }, () => this.filterData());
+    if(Object.keys(arrayFromSidebar).length !== 0) {
+      this.setState({
+        filterArray,
+      }, () => this.filterData())
+    }
+    else this.resetDisplay()
     };
 
   //this sorts any numerical rating that we decide to add a filter for
@@ -201,7 +213,7 @@ class ShowGenerator extends Component {
       return (b.rating.average > a.rating.average ? 1 : -1) * order;
     });
     this.setState({
-      //displayArray: sortArray,
+      displayArray: sortArray,
     });
   };
 
@@ -214,7 +226,7 @@ class ShowGenerator extends Component {
       (a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1) * order
     );
     this.setState({
-      //displayArray: sortArray,
+      displayArray: sortArray,
     });
   };
 

@@ -48,16 +48,16 @@ class SideBar extends Component {
 
   pushUniqueValues = (filterValue, testValue) => {
     let filters = {...this.state.filters};
-    let fA = filters[filterValue];
+    let filVal = filters[filterValue];
     
     if(Array.isArray(testValue)) {
       testValue.forEach(each => {
         this.pushUniqueValues(filterValue, each)
       });
     } 
-    else if (!(fA.includes(testValue))) {
-      fA.push(testValue);
-      fA.sort();
+    else if (!(filVal.includes(testValue))) {
+      filVal.push(testValue);
+      filVal.sort();
     }
 
     this.setState({
@@ -140,7 +140,6 @@ class SideBar extends Component {
     e.preventDefault();
     let returnFilters = {};
 
-
     this.setState({
       returnFilters
     }, () => {
@@ -174,7 +173,7 @@ class SideBar extends Component {
               return (
                 <>
                   <label className="languageContainer">{property}</label>
-                  <select id={property} name={property} value={this.state.returnFilters[property]} onChange={this.dropHandler}>
+                  <select id={property} name={property} onChange={this.dropHandler}>
                     <option></option>
                     {this.state.filters[property].map((each) => {
                       return <option>{each}</option>;
