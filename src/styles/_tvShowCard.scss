@@ -1,0 +1,55 @@
+.tvShowCard {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-around;
+    padding: 10%;
+    padding-bottom: 10px;
+  }
+  
+  .showCardContent {
+    text-align: center;
+    padding: 5%;
+    border: 5px solid white;
+    margin: 5px;
+    border-radius: 8px;
+  }
+
+  .showTitle {
+    padding-bottom: 20px;
+    font-size: 1.25rem;
+
+  }
+  .tvshowCard img {
+      width: 100%;
+    }
+    
+    .showCardContent ul li {
+      padding-bottom: 15px;
+      font-size: 1rem;
+    }
+
+  .listBtns {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .addToListBtn {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background: $coral;
+    border: 2px solid black;
+    color: $blue;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.6rem;
+    margin-bottom: 15px;
+    height: 26px;
+    font-family: $font;
+    font-weight: 700;
+    text-transform: uppercase;
+    height: 40px;
+  }

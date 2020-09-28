@@ -1,0 +1,57 @@
+body {
+    background: $green;
+    color: white;
+    font-size: 62.5%;
+    font-family: $font;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.mainTitle {
+    font-family: $font;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.createListBtn {
+    background: $coral;
+    border: 2px solid black;
+    color: $blue;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    margin-right: 17px;
+    height: 26px;
+    font-family: $font;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 10%;
+    height: 40px;
+}
+
+.createListBtn:hover{
+    background: white;
+    color: $coral;
+}
+header {
+    background: $blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    padding-bottom:5px;
+
+}

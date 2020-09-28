@@ -1,0 +1,92 @@
+//Side Bar Styles
+.showGeneratorContainer {
+    display: grid;
+    grid-template-columns: 2fr 9fr;
+}
+
+.searchBox {
+    width: 100%;
+    background: white;
+    border: none;
+    color: #577F90;
+    border-radius: 25px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    height: 10px;
+    font-family: $font;
+    font-weight: 400;
+    margin-top: 35px;
+    margin-left: 7px
+
+}
+
+.sideBarSearchBtn {
+    width: 79%;
+    background: $coral;
+    border: 2px solid black;
+    color: $blue;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.8rem;
+    margin-bottom: 45px;
+    margin-left: 17px;
+    height: 26px;
+    font-family: $font;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sideBarSearchBtn:hover{
+    background: white;
+    color: $coral;
+}
+
+.queryContainer {
+    margin-right: 30px;
+    padding-left:30px;
+}
+
+.criteriaContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.languageContainer,
+.sortByContainer {
+    color: #577F90;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-family: $font;
+    font-weight: 700;
+    margin-left: 4px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.firebase-data h1 {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-family: $font;
+    margin-left: 30px;
+
+}
+
+.firebase-data p {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+    margin-left: 30px;
+    padding: 0;
+}
+.firebase-data ul {
+    margin: 0;
+    padding: 0;
+}
+
+.listDelete {
+    margin-left: 30px;
+}

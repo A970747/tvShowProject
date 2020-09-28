@@ -1,0 +1,36 @@
+//Card Display
+.cardDisplayContainer { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+}
+
+.cardContainer img {
+    max-width: 100%
+}
+
+.movieContainer {
+    width: 100%;
+    background: white;
+    padding: 10px;
+    position: relative;
+}
+
+
+img {
+    width: 100%;
+}
+
+.bodyCardRating {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: $coral;
+    color: $blue;
+    padding: 3px;
+    border: 2px solid $blue;
+    border-radius: 10px;
+}
+
+.bodyCardTitle {
+    text-align: center;
+}
