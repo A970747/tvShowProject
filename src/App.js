@@ -2,19 +2,25 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ShowGenerator from "./ShowGenerator";
 import TvShowCard from "./TvShowCard";
-import firebase from "./firebase";
+import Auth from "./Auth";
+//import firebase from "./firebase";
+import "firebase/auth";
 import "./styles/styles.scss";
 import UserList from "./UserList";
 
+//const provider = new firebase.auth.GoogleAuthProvider();
+//const auth = firebase.auth();
+
 class App extends Component {
-  getListNameThenAddToDatabase = () => {
-    const listName = prompt("Enter List Name");
-    const dbRef = firebase.database().ref();
-    const userObj = {
-      listName: listName,
-      shows: []
+  constructor() {
+    super();
+    this.state = {
+      user: null
     }
-    dbRef.push(userObj)
+  }
+
+  setUserStatus = (status) => {
+
   }
 
   render() {
@@ -22,16 +28,12 @@ class App extends Component {
       <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
           <header>
-            <h1 className="mainTitle"> PiePepper</h1>
-            <button 
-            onClick={this.getListNameThenAddToDatabase}
-            className="createListBtn">
-              Create List
-            </button>
+            <h1 className="mainTitle"> showsearch</h1>
           </header>
-          <Route exact path="/" component={ShowGenerator} />
+          <Route exact path="/" component={ () => <ShowGenerator user={this.state.user} setUserStatus={this.setUserStatus}/>}/>
           <Route path="/show/:id" component={TvShowCard} />
           <Route path="/list/:listid" component={UserList} />
+          <Route path="/Auth" component={Auth} />
         </div>
       </Router>
     );

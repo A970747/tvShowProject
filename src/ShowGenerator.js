@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListSelection from "./ListSelection";
+import SignIn from "./SignIn";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import "./styles/styles.scss";
@@ -49,7 +50,7 @@ class ShowGenerator extends Component {
     axios({
       url: `http://api.tvmaze.com/search/shows?q=${this.state.query}`,
       }).then((response) => {
-      let storedDisplay = [...this.state.displayArray];
+      const storedDisplay = [...this.state.displayArray];
 
       this.setState({
         storedDisplay,
@@ -61,9 +62,9 @@ class ShowGenerator extends Component {
   }
 
   async setDefault() {
-    let response = await this.apiGeneral();
-    let displayArray = [...this.state.displayArray];
-    if(displayArray.length == 0) {
+    const response = await this.apiGeneral();
+    const displayArray = [...this.state.displayArray];
+    if(displayArray.length === 0) {
       response.forEach((each, index) => { if(index < 30) displayArray.push(each)})
     }
     let storedDisplay = displayArray;
@@ -75,11 +76,11 @@ class ShowGenerator extends Component {
   }
 
   makeCache = (data) => {
-    let response = data.data;
-    let tempApiData = this.state.apiData.map(each => { return each.id });
-    let currentData = [...this.state.apiData];
-    let newData = response.filter(each => { if(!(tempApiData.includes(each.id))) return true; });
-    let apiData = currentData.concat(newData);
+    const response = data.data;
+    const idArray = this.state.apiData.map(each => { return each.id });
+    const currentData = [...this.state.apiData];
+    const newData = response.filter(each => { if(!(idArray.includes(each.id))) return true; });
+    const apiData = currentData.concat(newData);
 
     this.setState({
       apiData,
@@ -95,10 +96,10 @@ class ShowGenerator extends Component {
   }
 
   loadMoreResults = async () => {
-    let displayLength = this.state.displayArray.length;
-    let apiLength = this.state.apiData.length;
-    let displayArray = [...this.state.displayArray];
-    let apiData = [...this.state.apiData].slice(displayLength,displayLength + 30)
+    const displayLength = this.state.displayArray.length;
+    const apiLength = this.state.apiData.length;
+    const displayArray = [...this.state.displayArray];
+    const apiData = [...this.state.apiData].slice(displayLength,displayLength + 30)
     let page = this.state.page
     if (displayLength + 30 >= apiLength) {
       page += 1;
@@ -106,7 +107,7 @@ class ShowGenerator extends Component {
     }
 
     apiData.forEach(item => displayArray.push(item));
-    let storedDisplay = displayArray;
+    const storedDisplay = displayArray;
 
     this.setState({
       page,
@@ -126,7 +127,7 @@ class ShowGenerator extends Component {
   };
 
   clearSearch = (searchValue) => {
-    let displayArray = [...this.state.storedDisplay];
+    const displayArray = [...this.state.storedDisplay];
 
     this.setState(
       {
@@ -137,7 +138,7 @@ class ShowGenerator extends Component {
 
   filterData = () => {
     let data = [...this.state.storedDisplay];
-    let filterObj = {...this.state.filterArray};
+    const filterObj = {...this.state.filterArray};
     for(let [key, value] of Object.entries(filterObj))  {
       data = data.filter( data => this.searchTree(key, value, data));
     }
@@ -243,7 +244,11 @@ class ShowGenerator extends Component {
     let apiLength = this.state.apiData.length
     let displayLength = this.state.displayArray.length
 
+            
+
     return (
+      <div>
+        <SignIn />
       <div className="showGeneratorContainer">
         <div className="sideBarContainer">
           <Sidebar
@@ -263,15 +268,16 @@ class ShowGenerator extends Component {
                   <div className="movieContainer">
                     <Link to={`/show/${each.id}`}>
                       <img
-                        src={
-                          each?.image === null
-                            ? NoImageAvailableLarge
-                            : each.image.medium
-                        }
+                        src={each?.image?.medium ?? NoImageAvailableLarge}
                         alt={each.name}
                       />
-                      <h4 className="bodyCardRating">{each.rating.average}</h4>
+                      {
+                      (each.rating.average > 0)
+                      ? <h4 className="bodyCardRating">{each.rating.average}</h4>
+                      : null
+                      }
                       <h3 className="bodyCardTitle">{each.name}</h3>
+                      
                     </Link>
                   </div>
                 );
@@ -284,6 +290,7 @@ class ShowGenerator extends Component {
             : null
           }
         </div>
+      </div>
       </div>
     );
   }

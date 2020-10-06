@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AddToList from "./AddToList";
+import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
 
 class TvShowCard extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class TvShowCard extends Component {
           </div>
 
           <img
-            src={data?.image && data?.image?.medium}
+            src={data?.image?.medium || NoImageAvailableLarge}
             alt={data.name}
             className="tvShowCardImg"
           />

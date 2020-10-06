@@ -84,10 +84,6 @@ class SideBar extends Component {
     }, () => this.createFilterArrays(this.props.displayArray));
   }
 
-  blah = () => {
-    console.log('blah')
-  }
-
   //this creates and returns to ShowGenerator, the array used
   // to filter the displayed results on the main page.
   dropHandler = (event) => {
@@ -120,7 +116,7 @@ class SideBar extends Component {
   };
 
   //send back searchBar values to ShowGenerator to use.
-  sideBarData = (event) => {
+  returnSearchValue = (event) => {
     event.preventDefault();
     this.props.searchPass(this.state.searchBar);
   };
@@ -160,7 +156,7 @@ class SideBar extends Component {
             onChange={this.searchHandler}
             className="searchBox"
           />
-          <button className="sideBarSearchBtn" onClick={this.sideBarData}>
+          <button className="sideBarSearchBtn" onClick={this.returnSearchValue}>
             Search
           </button>
           <button className="sideBarSearchBtn" onClick={this.clearSearch}>
