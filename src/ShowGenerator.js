@@ -248,49 +248,48 @@ class ShowGenerator extends Component {
 
     return (
       <div>
-        <SignIn />
-      <div className="showGeneratorContainer">
-        <div className="sideBarContainer">
-          <Sidebar
-            chosenFilters={this.state.chosenFilters}
-            displayArray={this.state.filterProp}
-            bringItOnBack={this.setFilterArray}
-            searchPass={this.setSearch}
-            clearPass={this.clearSearch}
-            sortPass={this.sortFunc}
-          />
-          <ListSelection />
+        <div className="showGeneratorContainer">
+          <div className="sideBarContainer">
+            <Sidebar
+              chosenFilters={this.state.chosenFilters}
+              displayArray={this.state.filterProp}
+              bringItOnBack={this.setFilterArray}
+              searchPass={this.setSearch}
+              clearPass={this.clearSearch}
+              sortPass={this.sortFunc}
+            />
+            <ListSelection />
+          </div>
+          <div className="cardDisplayContainer">
+            {this.state.displayArray.length !== 0 
+              ? (this.state.displayArray.map((each) => {
+                  return (
+                    <div className="movieContainer">
+                      <Link to={`/show/${each.id}`}>
+                        <img
+                          src={each?.image?.medium ?? NoImageAvailableLarge}
+                          alt={each.name}
+                        />
+                        {
+                        (each.rating.average > 0)
+                        ? <h4 className="bodyCardRating">{each.rating.average}</h4>
+                        : null
+                        }
+                        <h3 className="bodyCardTitle">{each.name}</h3>
+                        
+                      </Link>
+                    </div>
+                  );
+                })) 
+              : (<h2>No results to show for combination of search and/or filters.</h2>)}
+          </div>
+          <div>
+            { displayLength >= 30 && displayLength <= apiLength
+              ? <button onClick={this.loadMoreResults}>Load more results</button>
+              : null
+            }
+          </div>
         </div>
-        <div className="cardDisplayContainer">
-          {this.state.displayArray.length !== 0 
-            ? (this.state.displayArray.map((each) => {
-                return (
-                  <div className="movieContainer">
-                    <Link to={`/show/${each.id}`}>
-                      <img
-                        src={each?.image?.medium ?? NoImageAvailableLarge}
-                        alt={each.name}
-                      />
-                      {
-                      (each.rating.average > 0)
-                      ? <h4 className="bodyCardRating">{each.rating.average}</h4>
-                      : null
-                      }
-                      <h3 className="bodyCardTitle">{each.name}</h3>
-                      
-                    </Link>
-                  </div>
-                );
-              })) 
-            : (<h2>No results to show for combination of search and/or filters.</h2>)}
-        </div>
-        <div>
-          { displayLength >= 30 && displayLength <= apiLength
-            ? <button onClick={this.loadMoreResults}>Load more results</button>
-            : null
-          }
-        </div>
-      </div>
       </div>
     );
   }
