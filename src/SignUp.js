@@ -58,6 +58,16 @@ class SignUp extends Component {
     })
   }
 
+  ifSignedIn = () => {
+    if(this.state.redirect) {
+      this.setState({
+        password: null,
+        confirmPassword: null
+      })
+      return <Redirect to="/" />
+    }
+  }
+
   handleUserName = (e) => {
     this.setState({
       user: e.target.value
@@ -82,14 +92,8 @@ class SignUp extends Component {
     })
   }
 
-  ifSignedIn = () => {
-    if(this.state.redirect) {
-      return <Redirect to="/" />
-    }
-  }
-
   render() {
-    const {setUser} = this.context;
+    const { setUser } = this.context;
     return (
       <div>
         {this.ifSignedIn()} 

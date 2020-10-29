@@ -42,7 +42,6 @@ class TvShowCard extends Component {
             className="tvShowCardImg"
           />
         </div>
-
         <div className="listBtns">
           <AddToList id={this.props.match.params.id} />
         </div>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import NoImageAvailableLarge from './images/NoImageAvailableLarge.jpg'
 import firebase from "./firebase";
 import axios from 'axios'
@@ -7,6 +6,7 @@ class UserList extends Component {
   constructor() {
     super();
     this.state = {
+      listArray: [],
       displayListInfo: {},
       displayArray: [],
       arrayWithShowIDs: [],
@@ -15,18 +15,15 @@ class UserList extends Component {
   }
 
   componentDidMount() {
-    const dbRef = firebase.database().ref(this.props.match.params.listid)
-    dbRef.on('value', (snapshot) => {
-      const dbReturn = snapshot.val()
-      const idArray = []
-      for (let objEntry in dbReturn.shows) {
-        idArray.push(parseInt(objEntry))
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const userID = user.uid
+        const userList = firebase.database().ref().child(userID).child(this.props.match.params.listid)
+        userList.on('value', (snapshot) => {
+          const listArray = Object.values(snapshot.val())
+          console.log(listArray);
+        })
       }
-      this.setState({
-        displayListInfo: dbReturn,
-      })
-      this.sortArray()
-      this.createUserListDisplay()
     })
   }
 
@@ -68,11 +65,11 @@ class UserList extends Component {
       promiseArray.push(axios({ url: `https://api.tvmaze.com/shows/${each}` }));
     });
     Promise.all(promiseArray).then((item) => {
-      let storeArray = item.map((each) => {
+      let displayArray = item.map((each) => {
         return each.data;
       });
       this.setState({
-        displayArray: storeArray,
+        displayArray
       });
     });
   };

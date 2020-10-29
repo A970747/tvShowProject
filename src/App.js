@@ -8,7 +8,7 @@ import Auth from "./Auth";
 import "firebase/auth";
 import "./styles/styles.scss";
 import UserList from "./UserList";
-import AuthContext, { AuthProvider } from "./AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 
 class App extends Component {
@@ -19,7 +19,6 @@ class App extends Component {
     }
   }
 
-  //appUser: this.state.user, setAppUserStatus: this.setUserStatus
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>

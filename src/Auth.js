@@ -17,9 +17,6 @@ class SignIn extends Component {
 
   static contextType = AuthContext;
 
-  componentDidMount() {
-  }
-
   googleSignIn = (setUser) => {
     let provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -35,7 +32,6 @@ class SignIn extends Component {
       var email = error.email;
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
-      // ...
     });
   }
 
@@ -79,6 +75,9 @@ class SignIn extends Component {
 
   ifSignedIn = () => {
     if(this.state.redirect) {
+      this.setState({
+        password: null
+      })
       return <Redirect to="/" />
     }
   }
@@ -95,9 +94,11 @@ class SignIn extends Component {
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" minlength="8" value={this.state.password} onChange={this.handleUserPassword} required />     
           <button type="submit" value="Sign in" 
-            onClick={(event)=>{
-              event.preventDefault();
-              this.userSignIn(setUser)}
+            onClick={
+              (event) => {
+                event.preventDefault();
+                this.userSignIn(setUser)
+              }
             }>
             Sign-In 
           </button>

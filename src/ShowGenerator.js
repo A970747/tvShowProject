@@ -119,7 +119,6 @@ class ShowGenerator extends Component {
   //take the input from the search bar and set the state in ShowGenerator
   //so the results can be update and will show.
   setSearch = (searchValue) => {
-
     this.setState(
       {
         query: searchValue,
@@ -244,8 +243,6 @@ class ShowGenerator extends Component {
     let apiLength = this.state.apiData.length
     let displayLength = this.state.displayArray.length
 
-            
-
     return (
       <div>
         <div className="showGeneratorContainer">
@@ -261,7 +258,8 @@ class ShowGenerator extends Component {
             <ListSelection />
           </div>
           <div className="cardDisplayContainer">
-            {this.state.displayArray.length !== 0 
+            {
+              this.state.displayArray.length !== 0 
               ? (this.state.displayArray.map((each) => {
                   return (
                     <div className="movieContainer">
@@ -280,8 +278,9 @@ class ShowGenerator extends Component {
                       </Link>
                     </div>
                   );
-                })) 
-              : (<h2>No results to show for combination of search and/or filters.</h2>)}
+              })) 
+              : <h2>No results to show for combination of search and/or filters.</h2>
+            }
           </div>
           <div>
             { displayLength >= 30 && displayLength <= apiLength
