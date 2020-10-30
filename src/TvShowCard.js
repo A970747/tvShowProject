@@ -11,6 +11,7 @@ class TvShowCard extends Component {
     };
   }
   componentDidMount() {
+    console.log(this.props.location)
     axios({
       url: "https://api.tvmaze.com/shows/" + this.props.match.params.id,
     }).then((response) => {

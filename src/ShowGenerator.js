@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ListSelection from "./ListSelection";
-import SignIn from "./SignIn";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import "./styles/styles.scss";
@@ -263,7 +262,10 @@ class ShowGenerator extends Component {
               ? (this.state.displayArray.map((each) => {
                   return (
                     <div className="movieContainer">
-                      <Link to={`/show/${each.id}`}>
+                      <Link to={{
+                        pathname:`/show/${each.id}`,
+                        movieID: each
+                        }}>
                         <img
                           src={each?.image?.medium ?? NoImageAvailableLarge}
                           alt={each.name}
