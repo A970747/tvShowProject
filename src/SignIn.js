@@ -11,9 +11,7 @@ class SignIn extends Component {
   componentWillMount() {
     const { setUser } = this.context
 
-    firebase.auth().onAuthStateChanged(function (user) {
-      //firebase.database().ref().child(user.uid).child('thislist').push(`what:0`);
-      
+    firebase.auth().onAuthStateChanged(function (user) {  
       if (user) {
         setUser(user.displayName);
       }

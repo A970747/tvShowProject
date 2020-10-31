@@ -44,7 +44,6 @@ class ListSelection extends Component {
           userLists
         })
       })
-    
   }
 
   removeList(userList) {

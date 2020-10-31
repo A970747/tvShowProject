@@ -1,51 +1,80 @@
 import React, { Component } from "react";
-import axios from "axios";
-import AddToList from "./AddToList";
 import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
+import firebase from "./firebase";
+import "firebase/auth";
 
 class TvShowCard extends Component {
   constructor() {
     super();
     this.state = {
-      apiData: [],
+      userLists: []
     };
   }
-  componentDidMount() {
-    console.log(this.props.location)
-    axios({
-      url: "https://api.tvmaze.com/shows/" + this.props.match.params.id,
-    }).then((response) => {
-      this.setState({
-        apiData: response.data,
-      });
-    });
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const user = firebase.auth().currentUser.uid;
+        const userInfo = firebase.database().ref().child(user);
+        userInfo.on("value", (snapshot) => {
+          let userLists = Object.keys(snapshot.val())
+    
+          this.setState({
+            userLists
+          })
+        })
+      }
+    })
   }
+
   render() {
-    const data = this.state.apiData;
-    return (
+    const showInfo = this.props.location.movieID;
+
+    return (   
       <>
-        <div className="tvShowCard">
+        {
+        (this.props.location.movieID)
+        ? <>
+          <div className="tvShowCard">
           <div className="showCardContent">
-            <h1 className="showTitle">{data.name}</h1>
+            <h1 className="showTitle">{showInfo.name}</h1>
             <ul>
-              <li>{data.network && data.network.name}</li>
-              <li>{data.country}</li>
-              <li>{data.genres}</li>
+              <li>{showInfo.network && showInfo.network.name}</li>
+              <li>{showInfo.country}</li>
+              <li>{showInfo.genres}</li>
               <li>
-                {data.summary && data.summary.replace(/(<([^>]+)>)/gi, "")}
+                {showInfo.summary && showInfo.summary.replace(/(<([^>]+)>)/gi, "")}
               </li>
             </ul>
+          {
+            (firebase.auth().currentUser)
+            ? <>
+                <form>
+                  <label className="languageContainer">changethis</label>
+                  <select id="changethis" name="changethis" onChange="">
+                    <option></option>
+                    {this.state.userLists.map((each) => {
+                      return <option>{each}</option>;
+                    })}
+                  </select>
+                  <button type="submit">Add to List</button>
+                </form>
+              </>
+            : <></>
+          }
           </div>
 
           <img
-            src={data?.image?.medium || NoImageAvailableLarge}
-            alt={data.name}
+            src={showInfo?.image?.medium || NoImageAvailableLarge}
+            alt={showInfo.name}
             className="tvShowCardImg"
           />
-        </div>
-        <div className="listBtns">
-          <AddToList id={this.props.match.params.id} />
-        </div>
+
+          </div>
+
+        </>
+        : <></>
+        }
       </>
     );
   }
