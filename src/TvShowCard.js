@@ -7,7 +7,8 @@ class TvShowCard extends Component {
   constructor() {
     super();
     this.state = {
-      userLists: []
+      userLists: [],
+      listID: ''
     };
   }
 
@@ -24,6 +25,19 @@ class TvShowCard extends Component {
           })
         })
       }
+    })
+  }
+
+  addShowToList = (event) => {
+    event.preventDefault();
+    const user = firebase.auth().currentUser.uid
+    const id = this.props.location.movieID.id
+    firebase.database().ref().child(user).child(this.state.listID).update({[`${id}`]: this.props.location.movieID});
+  }
+
+  setUserList = (event) => {
+    this.setState({
+      listID: event.target.value
     })
   }
 
@@ -50,17 +64,17 @@ class TvShowCard extends Component {
             (firebase.auth().currentUser)
             ? <>
                 <form>
-                  <label className="languageContainer">changethis</label>
-                  <select id="changethis" name="changethis" onChange="">
+                  <label className="languageContainer">Add show to list</label>
+                  <select id="changethis" name="changethis" value={this.state.listID} onChange={this.setUserList}>
                     <option></option>
                     {this.state.userLists.map((each) => {
                       return <option>{each}</option>;
                     })}
                   </select>
-                  <button type="submit">Add to List</button>
+                  <button type="submit" onClick={this.addShowToList}>Add</button>
                 </form>
               </>
-            : <></>
+            : null
           }
           </div>
 
@@ -69,11 +83,9 @@ class TvShowCard extends Component {
             alt={showInfo.name}
             className="tvShowCardImg"
           />
-
           </div>
-
         </>
-        : <></>
+        : null
         }
       </>
     );

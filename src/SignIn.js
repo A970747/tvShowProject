@@ -89,13 +89,3 @@ class SignIn extends Component {
 }
 
 export default SignIn;
-
-  // getListNameThenAddToDatabase = () => {
-  //   const listName = prompt("Enter List Name");
-  //   const dbRef = firebase.database().ref();
-  //   const userObj = {
-  //     listName,
-  //     shows: []
-  //   }
-  //   dbRef.push(userObj)
-  // }

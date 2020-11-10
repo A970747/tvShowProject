@@ -34,12 +34,13 @@ class ListSelection extends Component {
     })
   };
 
+  //! remove
   showKeys() {
       const user = firebase.auth().currentUser.uid;
       const userInfo = firebase.database().ref().child(user);
       userInfo.on("value", (snapshot) => {
         let userLists = Object.keys(snapshot.val())
-
+        console.log(userLists);
         this.setState({
           userLists
         })
@@ -61,7 +62,10 @@ class ListSelection extends Component {
           {this.state.userLists.map((list) => {
             return (
               <li key={list}>
-                <Link to={`/list/${list}`}>
+                <Link to={{
+                  pathname:`/list/${list}`,
+                  listID: list
+                  }}>
                 <p>{list}</p>
                 </Link>
                 <button

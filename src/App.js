@@ -4,20 +4,13 @@ import ShowGenerator from "./ShowGenerator";
 import TvShowCard from "./TvShowCard";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import ListDisplay from "./ListDisplay";
 import Auth from "./Auth";
 import "firebase/auth";
 import "./styles/styles.scss";
-import UserList from "./UserList";
 import { AuthProvider } from "./AuthContext";
 
-
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: null
-    }
-  }
 
   render() {
     return (
@@ -33,7 +26,7 @@ class App extends Component {
           </AuthProvider>
           <Route exact path="/" component={ShowGenerator} />
           <Route path="/show/:id" component={TvShowCard} />
-          <Route path="/list/:listid" component={UserList} />
+          <Route path="/list/:listid" component={ListDisplay} />
         </div>
       </Router>
     );
