@@ -8,6 +8,9 @@ class ListSelection extends Component {
     super();
     this.state = {
       userLists: [],
+      listName: "",
+      user: null,
+      showList: false
     };
   }
 
@@ -21,7 +24,8 @@ class ListSelection extends Component {
           const userLists = Object.keys(snapshot.val());
     
           this.setState({
-            userLists
+            userLists,
+            user
           })
         }
         });
@@ -34,30 +38,57 @@ class ListSelection extends Component {
     })
   };
 
-  //! remove
-  showKeys() {
-      const user = firebase.auth().currentUser.uid;
-      const userInfo = firebase.database().ref().child(user);
-      userInfo.on("value", (snapshot) => {
-        let userLists = Object.keys(snapshot.val())
-        console.log(userLists);
-        this.setState({
-          userLists
-        })
-      })
+  listNameHandler = (event) => {
+    this.setState({
+      listName: event.target.value
+    })
+  }
+
+  createList = (event) => {
+    event.preventDefault();
+    (!this.state.userLists.includes(this.state.listName))
+    ? firebase.database().ref().child(firebase.auth().currentUser.uid).update({[this.state.listName]: 0})
+    : alert("List with that name already exists")
+    this.setState({
+      showList: false
+    })
   }
 
   removeList(userList) {
     const user = firebase.auth().currentUser.uid;
     const userInfo = firebase.database().ref().child(user).child(userList);
     userInfo.remove();
+    userInfo.on("value", (snapshot) => {
+      if (snapshot.val() === null) {
+      this.setState({
+        userLists: []
+      })
+    }
+    });
   }
 
   render() {
-
     return (
       <div className="firebase-data">
         <h1>User Lists</h1>
+        {
+        (this.props.user && !this.state.showList) 
+        ? <button onClick={() => this.setState({showList: true})} > Create New List </button>
+        : null
+        }
+        {
+        (this.state.showList) 
+        ? <div>
+            <form>
+              <label for="listName" className="languageContainer">Create User List</label>
+              <input id="listName" 
+                type="text" placeholder="enter list name" 
+                value={this.state.listName} onChange={this.listNameHandler} required/>
+              <button type="submit" onClick={this.createList}> Create</button>
+            </form>
+          </div>
+        : null
+        }    
         <ul>
           {this.state.userLists.map((list) => {
             return (
@@ -79,16 +110,22 @@ class ListSelection extends Component {
             );
           })}
         </ul>
-        <button
-          className="listDelete"
-          onClick={() => {
-            this.showKeys();
-          }}
-        >keys
-        </button>
+
       </div>
     );
   }
 }
 
 export default ListSelection;
+
+/* showKeys() {
+  const user = firebase.auth().currentUser.uid;
+  const userInfo = firebase.database().ref().child(user);
+  userInfo.on("value", (snapshot) => {
+    let userLists = Object.keys(snapshot.val())
+    console.log(userLists);
+    this.setState({
+      userLists
+    })
+  })
+} */

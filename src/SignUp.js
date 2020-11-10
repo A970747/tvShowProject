@@ -118,19 +118,3 @@ class SignUp extends Component {
 }
 
 export default SignUp;
-
-  // getListNameThenAddToDatabase = () => {
-  //   const listName = prompt("Enter List Name");
-  //   const dbRef = firebase.database().ref();
-  //   const userObj = {
-  //     listName,
-  //     shows: []
-  //   }
-  //   dbRef.push(userObj)
-  // }
-
-/* <button
-onClick={this.getListNameThenAddToDatabase}
-className="createListBtn">
-Create List
-</button> */

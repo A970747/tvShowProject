@@ -23,8 +23,8 @@ class App extends Component {
             </header>
             <Route path="/Auth" component={Auth} />
             <Route path="/SignUp" component={SignUp} />
-          </AuthProvider>
           <Route exact path="/" component={ShowGenerator} />
+          </AuthProvider>
           <Route path="/show/:id" component={TvShowCard} />
           <Route path="/list/:listid" component={ListDisplay} />
         </div>

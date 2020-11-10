@@ -5,6 +5,7 @@ import axios from "axios";
 import "./styles/styles.scss";
 import { Link } from "react-router-dom";
 import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
+import AuthContext from "./AuthContext";
 
 class ShowGenerator extends Component {
   constructor() {
@@ -25,6 +26,8 @@ class ShowGenerator extends Component {
       page: 0,
     };
   }
+
+  static contextType = AuthContext;
 
   //todo - FIX SORT
   //apiHandler handles the axios calls and returns an array of results by default
@@ -241,6 +244,7 @@ class ShowGenerator extends Component {
   render() {
     let apiLength = this.state.apiData.length
     let displayLength = this.state.displayArray.length
+    const { user } = this.context
 
     return (
       <div>
@@ -254,7 +258,7 @@ class ShowGenerator extends Component {
               clearPass={this.clearSearch}
               sortPass={this.sortFunc}
             />
-            <ListSelection />
+            <ListSelection user={ user }/>
           </div>
           <div className="cardDisplayContainer">
             {
