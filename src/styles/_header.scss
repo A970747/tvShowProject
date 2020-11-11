@@ -1,8 +1,8 @@
 body {
-    background: $green;
+    background: $secondaryBackground;
     color: white;
     font-size: 62.5%;
-    font-family: $font;
+    font-family: $primaryFont;
 }
 
 ul {
@@ -17,7 +17,7 @@ a {
 }
 
 .mainTitle {
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -26,16 +26,16 @@ a {
 }
 
 .createListBtn {
-    background: $coral;
+    background: $primaryAccent;
     border: 2px solid black;
-    color: $blue;
+    color: $primaryBackground;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.8rem;
     margin-bottom: 15px;
     margin-right: 17px;
     height: 26px;
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 700;
     text-transform: uppercase;
     width: 100px;
@@ -44,10 +44,10 @@ a {
 
 .createListBtn:hover{
     background: white;
-    color: $coral;
+    color: $primaryAccent;
 }
 header {
-    background: $blue;
+    background: $primaryBackground;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

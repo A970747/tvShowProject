@@ -15,20 +15,19 @@
     position: relative;
 }
 
-
 img {
     width: 100%;
 }
 
 .bodyCardRating {
     position: absolute;
-    top: 10px;
-    right: 20px;
-    background-color: $coral;
-    color: $blue;
-    padding: 3px;
-    border: 2px solid $blue;
-    border-radius: 10px;
+    top: 1px;
+    right: 15px;
+    background-color: $primaryAccent;
+    color: $primaryBackground;
+    padding: 4px;
+    border: 1px solid $primaryBackground;
+    border-radius: 5px;
 }
 
 .bodyCardTitle {

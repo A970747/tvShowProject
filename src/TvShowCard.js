@@ -18,11 +18,8 @@ class TvShowCard extends Component {
         const user = firebase.auth().currentUser.uid;
         const userInfo = firebase.database().ref().child(user);
         userInfo.on("value", (snapshot) => {
-          let userLists = Object.keys(snapshot.val())
-    
-          this.setState({
-            userLists
-          })
+          if (snapshot.val() !== null) this.setState({ userLists: Object.keys(snapshot.val()) })
+          else this.setState({ userLists: [] })
         })
       }
     })
@@ -50,33 +47,33 @@ class TvShowCard extends Component {
         (this.props.location.movieID)
         ? <>
           <div className="tvShowCard">
-          <div className="showCardContent">
-            <h1 className="showTitle">{showInfo.name}</h1>
-            <ul>
-              <li>{showInfo.network && showInfo.network.name}</li>
-              <li>{showInfo.country}</li>
-              <li>{showInfo.genres}</li>
-              <li>
-                {showInfo.summary && showInfo.summary.replace(/(<([^>]+)>)/gi, "")}
-              </li>
-            </ul>
-          {
-            (firebase.auth().currentUser)
-            ? <>
-                <form>
-                  <label className="languageContainer">Add show to list</label>
-                  <select id="changethis" name="changethis" value={this.state.listID} onChange={this.setUserList}>
-                    <option></option>
-                    {this.state.userLists.map((each) => {
-                      return <option>{each}</option>;
-                    })}
-                  </select>
-                  <button type="submit" onClick={this.addShowToList}>Add</button>
-                </form>
-              </>
-            : null
-          }
-          </div>
+            <div className="showCardContent">
+              <h1 className="showTitle">{showInfo.name}</h1>
+              <ul>
+                <li>{showInfo.network && showInfo.network.name}</li>
+                <li>{showInfo.country}</li>
+                <li>{showInfo.genres}</li>
+                <li>
+                  {showInfo.summary && showInfo.summary.replace(/(<([^>]+)>)/gi, "")}
+                </li>
+              </ul>
+            {
+              (firebase.auth().currentUser)
+              ? <>
+                  <form>
+                    <label className="languageContainer">Add show to list</label>
+                    <select id="changethis" name="changethis" value={this.state.listID} onChange={this.setUserList}>
+                      <option></option>
+                      {this.state.userLists.map((each) => {
+                        return <option>{each}</option>;
+                      })}
+                    </select>
+                    <button type="submit" onClick={this.addShowToList}>Add</button>
+                  </form>
+                </>
+              : <></>
+            }
+            </div>
 
           <img
             src={showInfo?.image?.medium || NoImageAvailableLarge}

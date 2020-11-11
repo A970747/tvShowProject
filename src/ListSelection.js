@@ -47,23 +47,23 @@ class ListSelection extends Component {
   createList = (event) => {
     event.preventDefault();
     (!this.state.userLists.includes(this.state.listName))
-    ? firebase.database().ref().child(firebase.auth().currentUser.uid).update({[this.state.listName]: 0})
-    : alert("List with that name already exists")
+      ? firebase.database().ref().child(firebase.auth().currentUser.uid).update({[this.state.listName]: 0})
+      : alert("List with that name already exists")
+
     this.setState({
       showList: false
     })
   }
 
-  removeList(userList) {
+  removeList(list) {
     const user = firebase.auth().currentUser.uid;
-    const userInfo = firebase.database().ref().child(user).child(userList);
-    userInfo.remove();
+    const userInfo = firebase.database().ref().child(user);
+    userInfo.child(list).remove();
+
     userInfo.on("value", (snapshot) => {
-      if (snapshot.val() === null) {
-      this.setState({
-        userLists: []
-      })
-    }
+      (snapshot.val() !== null) 
+        ? this.setState({ userLists: Object.keys(snapshot.val()) })
+        : this.setState({ userLists: [] })
     });
   }
 
@@ -80,7 +80,7 @@ class ListSelection extends Component {
         (this.state.showList) 
         ? <div>
             <form>
-              <label for="listName" className="languageContainer">Create User List</label>
+              <label for="listName" className="languageContainer sr-only">Create User List</label>
               <input id="listName" 
                 type="text" placeholder="enter list name" 
                 value={this.state.listName} onChange={this.listNameHandler} required/>
@@ -110,22 +110,9 @@ class ListSelection extends Component {
             );
           })}
         </ul>
-
       </div>
     );
   }
 }
 
 export default ListSelection;
-
-/* showKeys() {
-  const user = firebase.auth().currentUser.uid;
-  const userInfo = firebase.database().ref().child(user);
-  userInfo.on("value", (snapshot) => {
-    let userLists = Object.keys(snapshot.val())
-    console.log(userLists);
-    this.setState({
-      userLists
-    })
-  })
-} */

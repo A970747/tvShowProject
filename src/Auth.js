@@ -26,12 +26,12 @@ class SignIn extends Component {
     .then(() => this.checkAuthChange(setUser))
     .catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      let email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      let credential = error.credential;
     });
   }
 
@@ -52,8 +52,8 @@ class SignIn extends Component {
     .then(() => this.checkAuthChange(setUser))
     .catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       if (errorCode === 'auth/wrong-password') {
         alert('Wrong password.');
       } else {
@@ -118,19 +118,3 @@ class SignIn extends Component {
 }
 
 export default SignIn;
-
-  // getListNameThenAddToDatabase = () => {
-  //   const listName = prompt("Enter List Name");
-  //   const dbRef = firebase.database().ref();
-  //   const userObj = {
-  //     listName,
-  //     shows: []
-  //   }
-  //   dbRef.push(userObj)
-  // }
-
-/* <button
-onClick={this.getListNameThenAddToDatabase}
-className="createListBtn">
-Create List
-</button> */

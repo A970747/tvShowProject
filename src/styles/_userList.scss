@@ -7,7 +7,7 @@
 }
 
 .userListImage {
-    box-shadow: 15px 15px $blue;
+    box-shadow: 15px 15px $primaryBackground;
     margin-bottom: 5px;
     width: 60%;
 }
@@ -19,41 +19,4 @@
 
 .userCardRating {
     font-size: 1.25rem;
-}
-
-.downVoteBtn {
-        width: 140px;
-        background: $coral;
-        border: 2px solid black;
-        color: $blue;
-        border-radius: 4px;
-        padding: 5px;
-        font-size: 1rem;
-        margin-bottom: 45px;
-        margin-left: 17px;
-        height: 26px;
-        font-family: $font;
-        font-weight: 700;
-        text-transform: uppercase;
-}
-.upVoteBtn {
-    width: 140px;
-    background: $blue;
-    border: 2px solid black;
-    color: $coral;
-    border-radius: 4px;
-    padding: 5px;
-    font-size: 1rem;
-    margin-bottom: 45px;
-    margin-left: 17px;
-    height: 26px;
-    font-family: $font;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.upVoteBtn:hover,
-.downVoteBtn:hover {
-    background: white;
-    color: $coral;
 }

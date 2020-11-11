@@ -1,4 +1,6 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from "react";
+import ListSelection from "./ListSelection";
 
 class SideBar extends Component {
   constructor() {
@@ -15,7 +17,6 @@ class SideBar extends Component {
       ],
     };
   }
-
 
   createFilterArrays = (response) => {
     Array.from(Object.keys(this.props.chosenFilters)).forEach(filter => {
@@ -63,6 +64,10 @@ class SideBar extends Component {
     this.setState({
       filters,
     });
+  }
+
+  componentWillMount() {
+    this.updateFilters();
   }
 
   //anytime the props change, fire the createFilters array so we always
@@ -147,49 +152,53 @@ class SideBar extends Component {
   render() {
     return (
       <div className="queryContainer">
-        <form>
-          <input
-            type="text"
-            id="searchBox"
-            placeholder="Search"
-            value={this.state.searchBar}
-            onChange={this.searchHandler}
-            className="searchBox"
-          />
-          <button className="sideBarSearchBtn" onClick={this.returnSearchValue}>
-            Search
-          </button>
-          <button className="sideBarSearchBtn" onClick={this.clearSearch}>
-            clear
-          </button>
-        </form>
-        <form className="criteriaContainer" id="selectForm">
-          {
-            Object.keys(this.state.filters).map((property, index) => {
-              return (
-                <>
-                  <label className="languageContainer">{property}</label>
-                  <select id={property} name={property} onChange={this.dropHandler}>
-                    <option></option>
-                    {this.state.filters[property].map((each) => {
-                      return <option>{each}</option>;
-                    })}
-                  </select>
-                </>
-              );
-            })
-          }
-          <button className="sideBarSearchBtn" onClick={this.clearFilters}>
-            c filters
-          </button>
-          <label className="sortByContainer">Sort By</label>
-          <select id="sortBy" name="sortBy" onChange={this.sortHandler}>
-            <option value=""></option>
-            {this.state.sortArray.map((each) => {
-              return <option value={[each[1], each[2]]}>{each[0]}</option>;
-            })}
-          </select>
-        </form>
+          <form>
+            <input
+              type="text"
+              id="searchBox"
+              placeholder="Search"
+              value={this.state.searchBar}
+              onChange={this.searchHandler}
+              className="searchBox"
+            />
+            <button className="sideBarSearchBtn" onClick={this.returnSearchValue}>
+              Search
+            </button>
+            <button className="sideBarSearchBtn" onClick={this.clearSearch}>
+              clear
+            </button>
+          </form>
+          <form className="criteriaContainer" id="selectForm">
+            {
+              Object.keys(this.state.filters).map((property) => {
+                return (
+                  <>
+                    <label className="languageContainer">{property}</label>
+                    <select id={property} name={property} onChange={this.dropHandler}>
+                      <option></option>
+                      {this.state.filters[property].map((each) => {
+                        return <option>{each}</option>;
+                      })}
+                    </select>
+                  </>
+                );
+              })
+            }
+            <button className="sideBarSearchBtn" onClick={this.clearFilters}>
+              c filters
+            </button>
+
+            <label className="sortByContainer">Sort By</label>
+            <select id="sortBy" name="sortBy" onChange={this.sortHandler}>
+              <option value=""></option>
+              {
+                this.state.sortArray.map((each) => {
+                  return <option value={[each[1], each[2]]}>{each[0]}</option>;
+              })
+              }
+            </select>
+          </form>
+          <ListSelection user={ this.props.user }/>
       </div>
     );
   }

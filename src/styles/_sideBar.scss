@@ -14,7 +14,7 @@
     font-size: 0.9rem;
     margin-bottom: 5px;
     height: 10px;
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 400;
     margin-top: 35px;
     margin-left: 7px
@@ -23,26 +23,27 @@
 
 .sideBarSearchBtn {
     width: 79%;
-    background: $coral;
-    border: 2px solid black;
-    color: $blue;
+    background: $primaryAccent;
+    border: 2px solid $primaryBlack;
+    color: $primaryBackground;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.8rem;
     margin-bottom: 45px;
     margin-left: 17px;
     height: 26px;
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .sideBarSearchBtn:hover{
     background: white;
-    color: $coral;
+    color: $primaryAccent;
 }
 
 .queryContainer {
+    position: sticky;
     margin-right: 30px;
     padding-left:30px;
 }
@@ -59,7 +60,7 @@
     color: #577F90;
     border-radius: 25px;
     font-size: 0.9rem;
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 700;
     margin-left: 4px;
     text-transform: uppercase;
@@ -69,7 +70,7 @@
 .firebase-data h1 {
     font-size: 1.6rem;
     text-transform: uppercase;
-    font-family: $font;
+    font-family: $primaryFont;
     margin-left: 30px;
 
 }

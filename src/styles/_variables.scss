@@ -1,6 +1,28 @@
-$blue: #577F90;
-$green: #86C2AE;
-$coral: #F0917A;
-$black: #090808;
+// variables
+	$primaryBlack: #040405;
+	$primaryWhite: #FDFDFD;
 
-$font: 'Montserrat', sans-serif;
+	$primaryBackground: #577F90;
+	$secondaryBackground: #86C2AE;
+	$tertiaryBackground: #FFF0E7;
+	
+	$primaryAccent: #F0917A;
+	$secondaryAccent: #4A455C;
+
+	$primaryFont: 'Cormorant Garamond', serif;
+	$secondaryFont:'Montserrat', sans-serif;
+
+	$anchorTagHoverFocus: 'a:focus, a:hover';
+
+	$primaryFont: 'Montserrat', sans-serif;
+
+	@mixin fontSize($sizeValue){
+			font-size: $sizeValue * 1px;
+			font-size: ($sizeValue/10) * 1rem;
+	}
+
+	@mixin flexCenter() {
+			display: grid;
+			justify-items: center;
+			align-items: center;
+	}

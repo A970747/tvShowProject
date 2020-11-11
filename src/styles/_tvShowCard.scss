@@ -20,14 +20,15 @@
     font-size: 1.25rem;
 
   }
+  
   .tvshowCard img {
       width: 100%;
     }
     
-    .showCardContent ul li {
-      padding-bottom: 15px;
-      font-size: 1rem;
-    }
+  .showCardContent ul li {
+    padding-bottom: 15px;
+    font-size: 1rem;
+  }
 
   .listBtns {
     display: flex;
@@ -40,15 +41,15 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background: $coral;
+    background: $primaryAccent;
     border: 2px solid black;
-    color: $blue;
+    color: $primaryBackground;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.6rem;
     margin-bottom: 15px;
     height: 26px;
-    font-family: $font;
+    font-family: $primaryFont;
     font-weight: 700;
     text-transform: uppercase;
     height: 40px;

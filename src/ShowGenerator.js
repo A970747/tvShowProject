@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import ListSelection from "./ListSelection";
+import { Link } from "react-router-dom";
+import AuthContext from "./AuthContext";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import "./styles/styles.scss";
-import { Link } from "react-router-dom";
 import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
-import AuthContext from "./AuthContext";
+import ArrowLeft from "./images/arrow-left-solid.svg";
+import ArrowRight from "./images/arrow-right-solid.svg";
 
 class ShowGenerator extends Component {
   constructor() {
     super();
     this.state = {
+      displaySidebar: true,
       query: "",
       chosenFilters: {
         language: undefined,
@@ -102,14 +104,15 @@ class ShowGenerator extends Component {
     const apiLength = this.state.apiData.length;
     const displayArray = [...this.state.displayArray];
     const apiData = [...this.state.apiData].slice(displayLength,displayLength + 30)
+    const storedDisplay = displayArray;
     let page = this.state.page
+
     if (displayLength + 30 >= apiLength) {
       page += 1;
       await this.apiGeneral(page);
     }
 
     apiData.forEach(item => displayArray.push(item));
-    const storedDisplay = displayArray;
 
     this.setState({
       page,
@@ -241,6 +244,11 @@ class ShowGenerator extends Component {
       : this.ratingSort(settings[1]);
   };
 
+  toggleSidebar = () => {
+    console.log(this.state.displaySidebar);
+    this.setState({ displaySidebar: !this.state.displaySidebar })
+  }
+
   render() {
     let apiLength = this.state.apiData.length
     let displayLength = this.state.displayArray.length
@@ -249,51 +257,64 @@ class ShowGenerator extends Component {
     return (
       <div>
         <div className="showGeneratorContainer">
-          <div className="sideBarContainer">
-            <Sidebar
-              chosenFilters={this.state.chosenFilters}
-              displayArray={this.state.filterProp}
-              bringItOnBack={this.setFilterArray}
-              searchPass={this.setSearch}
-              clearPass={this.clearSearch}
-              sortPass={this.sortFunc}
-            />
-            <ListSelection user={ user }/>
-          </div>
-          <div className="cardDisplayContainer">
-            {
-              this.state.displayArray.length !== 0 
-              ? (this.state.displayArray.map((each) => {
-                  return (
-                    <div className="movieContainer">
-                      <Link to={{
-                        pathname:`/show/${each.id}`,
-                        movieID: each
-                        }}>
-                        <img
-                          src={each?.image?.medium ?? NoImageAvailableLarge}
-                          alt={each.name}
-                        />
-                        {
-                        (each.rating.average > 0)
-                        ? <h4 className="bodyCardRating">{each.rating.average}</h4>
-                        : null
-                        }
-                        <h3 className="bodyCardTitle">{each.name}</h3>
-                        
-                      </Link>
-                    </div>
-                  );
-              })) 
-              : <h2>No results to show for combination of search and/or filters.</h2>
-            }
-          </div>
+          {
+          (!this.state.displaySidebar)
+          ? <div className="expandContainer">
+              <input type="image" className="expandArrow" 
+                src={ArrowRight} alt="right-pointing-arrow"
+                onClick={this.toggleSidebar}/>
+            </div>
+          : <div className="sidebarContainer">
+              <Sidebar
+                chosenFilters={this.state.chosenFilters}
+                displayArray={this.state.filterProp}
+                bringItOnBack={this.setFilterArray}
+                searchPass={this.setSearch}
+                clearPass={this.clearSearch}
+                sortPass={this.sortFunc}
+                user={user}
+              />
+              <div className="expandContainer">
+                <input type="image" className="expandArrow" 
+                  src={ArrowLeft} alt="left-pointing-arrow"
+                  onClick={this.toggleSidebar}/>
+              </div>
+            </div>
+          }
+        <div className="cardDisplayContainer">
+          {
+            this.state.displayArray.length !== 0 
+            ? (this.state.displayArray.map((each) => {
+                return (
+                  <div className="movieContainer">
+                    <Link to={{
+                      pathname:`/show/${each.id}`,
+                      movieID: each
+                      }}>
+                      <img
+                        src={each?.image?.medium ?? NoImageAvailableLarge}
+                        alt={each.name}
+                      />
+                      {
+                      (each.rating.average > 0)
+                      ? <h4 className="bodyCardRating">{each.rating.average}</h4>
+                      : null
+                      }
+                      <h3 className="bodyCardTitle">{each.name}</h3>
+                      
+                    </Link>
+                  </div>
+                );
+            })) 
+            : <h3>No results for combination of search and/or filters.</h3>
+          }
           <div>
             { displayLength >= 30 && displayLength <= apiLength
               ? <button onClick={this.loadMoreResults}>Load more results</button>
-              : null
+              : <></>
             }
           </div>
+        </div>
         </div>
       </div>
     );

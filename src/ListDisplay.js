@@ -65,7 +65,6 @@ class ListDisplay extends Component {
 														: null
 												}
 												<h3 className="bodyCardTitle">{each.name}</h3>
-
 											</Link>
 										</div>
 									);
