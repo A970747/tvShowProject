@@ -70,7 +70,7 @@ class ListSelection extends Component {
   render() {
     return (
       <div className="firebase-data">
-        <h1>User Lists</h1>
+        <h2>User Lists</h2>
         {
         (this.props.user && !this.state.showList) 
         ? <button onClick={() => this.setState({showList: true})} > Create New List </button>

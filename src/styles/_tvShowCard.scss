@@ -1,4 +1,4 @@
-.tvShowCard {
+  .tvShowCard {
     display: flex;
     width: 90%;
     margin: 0 auto;
@@ -18,7 +18,6 @@
   .showTitle {
     padding-bottom: 20px;
     font-size: 1.25rem;
-
   }
   
   .tvshowCard img {
@@ -53,4 +52,9 @@
     font-weight: 700;
     text-transform: uppercase;
     height: 40px;
+  }
+
+  .cardImg {
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid $secondaryBackground;
   }

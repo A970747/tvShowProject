@@ -5,8 +5,8 @@ import Sidebar from "./Sidebar";
 import axios from "axios";
 import "./styles/styles.scss";
 import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
-import ArrowLeft from "./images/arrow-left-solid.svg";
-import ArrowRight from "./images/arrow-right-solid.svg";
+import ArrowLeft from "./images/angle-left-solid.svg";
+import ArrowRight from "./images/angle-double-right-solid.svg";
 
 class ShowGenerator extends Component {
   constructor() {
@@ -259,12 +259,12 @@ class ShowGenerator extends Component {
         <div className="showGeneratorContainer">
           {
           (!this.state.displaySidebar)
-          ? <div className="expandContainer">
+          ? <div className="sidebarContracted">
               <input type="image" className="expandArrow" 
                 src={ArrowRight} alt="right-pointing-arrow"
                 onClick={this.toggleSidebar}/>
             </div>
-          : <div className="sidebarContainer">
+          : <div className="sidebarExpanded">
               <Sidebar
                 chosenFilters={this.state.chosenFilters}
                 displayArray={this.state.filterProp}
@@ -291,7 +291,7 @@ class ShowGenerator extends Component {
                       pathname:`/show/${each.id}`,
                       movieID: each
                       }}>
-                      <img
+                      <img className="cardImg"
                         src={each?.image?.medium ?? NoImageAvailableLarge}
                         alt={each.name}
                       />
@@ -301,7 +301,6 @@ class ShowGenerator extends Component {
                       : null
                       }
                       <h3 className="bodyCardTitle">{each.name}</h3>
-                      
                     </Link>
                   </div>
                 );

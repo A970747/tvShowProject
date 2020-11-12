@@ -185,7 +185,7 @@ class SideBar extends Component {
               })
             }
             <button className="sideBarSearchBtn" onClick={this.clearFilters}>
-              c filters
+              clear
             </button>
 
             <label className="sortByContainer">Sort By</label>

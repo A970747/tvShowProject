@@ -2,6 +2,9 @@
 .cardDisplayContainer { 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    grid-gap: 10px;
+    background-color: $primaryWhite;
+    padding: 5px;
 }
 
 .cardContainer img {
@@ -9,14 +12,10 @@
 }
 
 .movieContainer {
-    width: 100%;
-    background: white;
-    padding: 10px;
     position: relative;
-}
-
-img {
     width: 100%;
+    background-color: $tertiaryBackground;
+    border-radius: 5px;
 }
 
 .bodyCardRating {
@@ -31,5 +30,8 @@ img {
 }
 
 .bodyCardTitle {
+    @include fontSize(9);
     text-align: center;
+    color: $primaryBlack;
+    margin: 10px 0;
 }

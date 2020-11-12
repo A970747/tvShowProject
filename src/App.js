@@ -18,7 +18,7 @@ class App extends Component {
         <div className="App">
           <AuthProvider>
             <header>
-              <h1 className="mainTitle"> showsearch</h1>
+              <h1 className="mainTitle"> show search</h1>
               <SignIn />
             </header>
             <Route path="/Auth" component={Auth} />

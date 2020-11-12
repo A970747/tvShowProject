@@ -2,11 +2,11 @@
 	$primaryBlack: #040405;
 	$primaryWhite: #FDFDFD;
 
-	$primaryBackground: #577F90;
-	$secondaryBackground: #86C2AE;
-	$tertiaryBackground: #FFF0E7;
+	$primaryBackground: #2d3142;
+	$secondaryBackground: #4f5d75;
+	$tertiaryBackground: #bfc0c0;
 	
-	$primaryAccent: #F0917A;
+	$primaryAccent: #ef8354;
 	$secondaryAccent: #4A455C;
 
 	$primaryFont: 'Cormorant Garamond', serif;
@@ -15,6 +15,7 @@
 	$anchorTagHoverFocus: 'a:focus, a:hover';
 
 	$primaryFont: 'Montserrat', sans-serif;
+	$secondaryFont: 'Lobster', cursive;
 
 	@mixin fontSize($sizeValue){
 			font-size: $sizeValue * 1px;
@@ -26,3 +27,15 @@
 			justify-items: center;
 			align-items: center;
 	}
+
+/* 	$primaryBackground: #577F90;
+	$secondaryBackground: #86C2AE;
+	$tertiaryBackground: #FFF0E7;
+	
+	$primaryAccent: #F0917A;
+	$secondaryAccent: #4A455C */;
+
+/* #2d3142
+#4f5d75
+#bfc0c0
+#ef8354 */
