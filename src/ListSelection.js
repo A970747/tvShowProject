@@ -69,7 +69,7 @@ class ListSelection extends Component {
 
   render() {
     return (
-      <div className="firebase-data">
+      <div>
         <h2>User Lists</h2>
         {
         (this.props.user && !this.state.showList) 

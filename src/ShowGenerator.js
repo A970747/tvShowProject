@@ -44,24 +44,21 @@ class ShowGenerator extends Component {
 
   async apiGeneral(page = 0) {
     let response = await axios({
-        url: `http://api.tvmaze.com/shows?page=${page}`,
+      url: `http://api.tvmaze.com/shows?page=${page}`,
     })
     this.makeCache(response);
     return response.data;
   }
 
   apiSearch() {
-    axios({
-      url: `http://api.tvmaze.com/search/shows?q=${this.state.query}`,
-      }).then((response) => {
-      const storedDisplay = [...this.state.displayArray];
+    axios({ url: `http://api.tvmaze.com/search/shows?q=${this.state.query}`})
+      .then((response) => {
+        const storedDisplay = [...this.state.displayArray];
 
-      this.setState({
-        storedDisplay,
-        displayArray: response.data.map((each) => {
-          return each.show;
-        }),
-      });
+        this.setState({
+          storedDisplay,
+          displayArray: response.data.map(each => each.show),
+        }, () => this.updateFilters());
     });
   }
 
@@ -136,7 +133,7 @@ class ShowGenerator extends Component {
     this.setState(
       {
         displayArray,
-        query: searchValue,
+        //query: searchValue,
       });
   }
 
@@ -265,6 +262,11 @@ class ShowGenerator extends Component {
                 onClick={this.toggleSidebar}/>
             </div>
           : <div className="sidebarExpanded">
+              <div className="expandContainer">
+                <input type="image" className="expandArrow" 
+                  src={ArrowLeft} alt="left-pointing-arrow"
+                  onClick={this.toggleSidebar}/>
+              </div>
               <Sidebar
                 chosenFilters={this.state.chosenFilters}
                 displayArray={this.state.filterProp}
@@ -274,11 +276,6 @@ class ShowGenerator extends Component {
                 sortPass={this.sortFunc}
                 user={user}
               />
-              <div className="expandContainer">
-                <input type="image" className="expandArrow" 
-                  src={ArrowLeft} alt="left-pointing-arrow"
-                  onClick={this.toggleSidebar}/>
-              </div>
             </div>
           }
         <div className="cardDisplayContainer">

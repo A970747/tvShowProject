@@ -17,6 +17,11 @@
     background-color: $tertiaryBackground;
     border-radius: 5px;
 }
+                                                                                
+.movieContainer:focus,
+.movieContainer:hover {
+    border: 2px solid $primaryAccent;
+}
 
 .bodyCardRating {
     position: absolute;

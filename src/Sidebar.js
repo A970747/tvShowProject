@@ -123,9 +123,11 @@ class SideBar extends Component {
   //send back searchBar values to ShowGenerator to use.
   returnSearchValue = (event) => {
     event.preventDefault();
-    this.props.searchPass(this.state.searchBar);
+    if(this.state.searchBar !== "") {
+      this.props.searchPass(this.state.searchBar);
+    }
+    else {alert("Search term required");}
   };
-
 
   //todo this needs to clear the value in the searchbox, change the value in state to "" and
   // put back the old displayArray.

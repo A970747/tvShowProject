@@ -24,7 +24,7 @@ class SignIn extends Component {
     const { user, setUser } = this.context
 
     return (
-      <div className="firebase-data">
+      <div>
         {
           (user === null)
             ? <Link to={`/Auth`}>
