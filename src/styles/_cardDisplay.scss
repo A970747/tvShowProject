@@ -1,42 +1,71 @@
 //Card Display
 .cardDisplayContainer { 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-    grid-gap: 10px;
-    background-color: $primaryWhite;
-    padding: 5px;
-}
-
-.cardContainer img {
-    max-width: 100%
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+	grid-auto-rows: minmax(220px,275px);
+	grid-gap: 10px;
+	background-color: $primaryWhite;
+	padding: 5px;
 }
 
 .movieContainer {
-    position: relative;
-    width: 100%;
-    background-color: $tertiaryBackground;
-    border-radius: 5px;
+	position: relative;
+	width: 100%;
+	background-color: $tertiaryBackground;
+	border-radius: 5px;
+
+		img {
+			max-height: 85%;
+		}
 }
-                                                                                
+
 .movieContainer:focus,
 .movieContainer:hover {
-    border: 2px solid $primaryAccent;
+	border: 2px solid $primaryAccent;
 }
 
 .bodyCardRating {
-    position: absolute;
-    top: 1px;
-    right: 15px;
-    background-color: $primaryAccent;
-    color: $primaryBackground;
-    padding: 4px;
-    border: 1px solid $primaryBackground;
-    border-radius: 5px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: $primaryAccent;
+	color: $primaryBackground;
+	padding: 4px;
+	border: 1px solid $primaryBackground;
+	border-radius: 5px;
+	margin: 0;
 }
 
 .bodyCardTitle {
-    @include fontSize(9);
-    text-align: center;
-    color: $primaryBlack;
-    margin: 10px 0;
+	@include fontSize(9);
+	text-align: center;
+	color: $primaryBlack;
+}
+
+.loadMoreResults {
+	min-height: 5vh;
+	height: 50px;
+	width: 100%;
+	grid-column: 2 / 3 ;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $primaryWhite;
+
+		button {
+			@include fontSize(9);
+			font-weight: 700;
+			background-color: $primaryAccent;
+			border: 1px solid $primaryBlack;
+			color: $primaryBackground;
+			border-radius: 5px;
+			padding: 5px 0;
+			width: 33%;
+		}
+
+		button:hover,
+		button:focus {
+			background-color: $primaryWhite;
+			color: $primaryAccent;
+		}
 }

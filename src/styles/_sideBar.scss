@@ -1,85 +1,158 @@
 //Side Bar Styles
-.showGeneratorContainer {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
+.showGeneratorContainerExpanded {
+	display: grid;
+	grid-template-columns: 135px 1fr;
+	background-color: $secondaryBackground;
+	min-height: 85vh
+}
+
+.showGeneratorContainerContracted {
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	background-color: $secondaryBackground;
+	min-height: 85vh
 }
 
 .searchBox {
-    @include fontSize(10);
-    width: 100%;
-    background: $primaryWhite;
-    border: none;
-    color: #577F90;
-    border-radius: 10px;
-    font-family: $primaryFont;
-    text-align: center;
-    padding: 3px;
+	@include fontSize(10);
+	width: 100%;
+	background: $primaryWhite;
+	border: none;
+	color: #577F90;
+	border-radius: 10px;
+	font-family: $primaryFont;
+	text-align: center;
+	padding: 3px;
 }
 
-.sideBarSearchBtn {
-    @include fontSize(8);
-    width: 75%;
-    background: $primaryAccent;
-    border: 1px solid $primaryBlack;
-    color: $primaryBackground;
-    border-radius: 5px;
-    padding: 5px;
-    height: 26px;
-    font-family: $primaryFont;
-    font-weight: 700;
-    text-transform: uppercase;
+.sideBarBtn,
+.clearButton {
+	@include fontSize(8);
+	width: 75%;
+	background: $primaryAccent;
+	border: 1px solid $primaryBlack;
+	color: $primaryBackground;
+	border-radius: 5px;
+	padding: 5px;
+	min-height: 26px;
+	font-family: $primaryFont;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-top: 5px;
+
+		&:hover{
+			background: $primaryWhite;
+			color: $primaryAccent;
+		}
 }
 
-.sideBarSearchBtn:hover{
-    background: white;
-    color: $primaryAccent;
+.searchForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .queryContainer {
-    position: sticky;
-    top: 100px;
-    padding: 0 10px;
+	position: sticky;
+	top: 100px;
+	padding: 0 10px;
+	display: grid;
+	align-content: flex-start;
+	min-height: calc(85vh - 15px);
+	grid-gap: 20px;
+
+	input,
+	select {
+			width: 100%;
+		}
 }
 
 .criteriaContainer {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: grid;
+	margin-bottom: 20px;
+
+	label {
+		margin-top: 5px;
+	}
+
+	button {
+		justify-self: center;
+		margin-top: 5px;
+	}
 }
 
 .languageContainer,
 .sortByContainer {
-    @include fontSize(9);
-    color: $tertiaryBackground;
-    border-radius: 25px;
-    font-family: $primaryFont;
-    font-weight: 700;
-    text-transform: uppercase;
+	@include fontSize(9);
+	color: $tertiaryBackground;
+	border-radius: 25px;
+	font-family: $primaryFont;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-align: left;
 }
 
 .listDelete {
-    margin-left: 30px;
+	background-color: $primaryAccent;
+	border: 1px solid $primaryBackground;
+	border-radius: 5px;
+	padding: 5px;
+	cursor: pointer;
 }
 
 .expandArrow {
 	max-height: 50px;
 	width: 100%;
+	position: sticky;
+	top: 10px;
 }
 
 .expandContainer {
-    position: sticky;
-    top: 10px;
+	position: sticky;
+	top: 10px;
 }
 
 .sidebarContracted {
-    // display: flex;
-    // height: 100vh;
-    // width: 100%;
-    // align-items: center;
+	max-width: 75px;
+	background-color: $secondaryBackground;
+	min-height: 90vh;
 }
 
 .sidebarExpanded {
-    max-width: 150px;
-    padding-top: 10px;
+	max-width: 150px;
+	padding-top: 10px;
+	background-color: $secondaryBackground;
+	min-height: calc(85vh - 15px);
+}
+
+.userListContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+		ul {
+			max-width: 125px;
+			margin-top: 20px;
+			max-height: 20vh;
+			overflow-y: scroll;
+		}
+
+		li {
+			display: grid;
+			grid-template-columns: auto auto;
+			justify-content: space-between;
+			align-items: center;
+			margin: 5px 0;
+		}
+
+		h2 {
+			@include fontSize(12);
+		}
+
+		p {
+			@include fontSize(10);
+			max-width: 100px;
+			word-wrap: break-word;
+			margin: 2px 0;
+		}
 }

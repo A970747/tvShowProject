@@ -51,6 +51,11 @@ class ListDisplay extends Component {
 								? (this.state.displayArray.map((each) => {
 									return (
 										<div className="movieContainer">
+											{
+											(each.rating.average > 0)
+												? <h4 className="bodyCardRating">{each.rating.average}</h4>
+												: null
+											}
 											<Link to={{
 												pathname: `/show/${each.id}`,
 												movieID: each
@@ -59,11 +64,6 @@ class ListDisplay extends Component {
 													src={each?.image?.medium ?? NoImageAvailableLarge}
 													alt={each.name}
 												/>
-												{
-													(each.rating.average > 0)
-														? <h4 className="bodyCardRating">{each.rating.average}</h4>
-														: null
-												}
 												<h3 className="bodyCardTitle">{each.name}</h3>
 											</Link>
 										</div>

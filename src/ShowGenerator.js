@@ -66,7 +66,7 @@ class ShowGenerator extends Component {
     const response = await this.apiGeneral();
     const displayArray = [...this.state.displayArray];
     if(displayArray.length === 0) {
-      response.forEach((each, index) => { if(index < 30) displayArray.push(each)})
+      response.forEach((each, index) => { if(index < 33) displayArray.push(each)})
     }
     let storedDisplay = displayArray;
 
@@ -100,7 +100,7 @@ class ShowGenerator extends Component {
     const displayLength = this.state.displayArray.length;
     const apiLength = this.state.apiData.length;
     const displayArray = [...this.state.displayArray];
-    const apiData = [...this.state.apiData].slice(displayLength,displayLength + 30)
+    const apiData = [...this.state.apiData].slice(displayLength,displayLength + 33)
     const storedDisplay = displayArray;
     let page = this.state.page
 
@@ -135,18 +135,6 @@ class ShowGenerator extends Component {
         displayArray,
         //query: searchValue,
       });
-  }
-
-  filterData = () => {
-    let data = [...this.state.storedDisplay];
-    const filterObj = {...this.state.filterArray};
-    for(let [key, value] of Object.entries(filterObj))  {
-      data = data.filter( data => this.searchTree(key, value, data));
-    }
-
-    this.setState({
-      displayArray: data,
-    })
   }
 
   resetDisplay = () => {
@@ -206,6 +194,18 @@ class ShowGenerator extends Component {
     else this.resetDisplay()
     };
 
+  filterData = () => {
+    let data = [...this.state.storedDisplay];
+    const filterObj = {...this.state.filterArray};
+    for(let [key, value] of Object.entries(filterObj))  {
+      data = data.filter( data => this.searchTree(key, value, data));
+    }
+
+    this.setState({
+      displayArray: data,
+    })
+  }
+
   //this sorts any numerical rating that we decide to add a filter for
   // the order argument can be set to 1 or -1 to allow for reversing the order
   // returned.
@@ -253,13 +253,15 @@ class ShowGenerator extends Component {
 
     return (
       <div>
-        <div className="showGeneratorContainer">
+        <div className={(this.state.displaySidebar) ? `showGeneratorContainerExpanded` : `showGeneratorContainerContracted`}>
           {
           (!this.state.displaySidebar)
           ? <div className="sidebarContracted">
-              <input type="image" className="expandArrow" 
-                src={ArrowRight} alt="right-pointing-arrow"
-                onClick={this.toggleSidebar}/>
+              <div className="setHeight">
+                <input type="image" className="expandArrow" 
+                  src={ArrowRight} alt="right-pointing-arrow"
+                  onClick={this.toggleSidebar}/>
+              </div>
             </div>
           : <div className="sidebarExpanded">
               <div className="expandContainer">
@@ -304,13 +306,13 @@ class ShowGenerator extends Component {
             })) 
             : <h3>No results for combination of search and/or filters.</h3>
           }
-          <div>
-            { displayLength >= 30 && displayLength <= apiLength
-              ? <button onClick={this.loadMoreResults}>Load more results</button>
-              : <></>
-            }
-          </div>
         </div>
+        { displayLength >= 30 && displayLength <= apiLength
+          ? <div className="loadMoreResults">
+              <button onClick={this.loadMoreResults}>Load more results</button>
+            </div>
+          : <></>
+        }
         </div>
       </div>
     );

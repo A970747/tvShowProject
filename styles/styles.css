@@ -337,7 +337,7 @@ header {
   margin-left: 7px;
 }
 
-.sideBarSearchBtn {
+.sideBarBtn {
   width: 79%;
   background: #F0917A;
   border: 2px solid black;
@@ -353,7 +353,7 @@ header {
   text-transform: uppercase;
 }
 
-.sideBarSearchBtn:hover {
+.sideBarBtn:hover {
   background: white;
   color: #F0917A;
 }

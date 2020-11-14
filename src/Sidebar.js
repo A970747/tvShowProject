@@ -56,7 +56,7 @@ class SideBar extends Component {
         this.pushUniqueValues(filterValue, each)
       });
     } 
-    else if (!(filVal.includes(testValue))) {
+    else if (!(filVal.includes(testValue)) && ![null, undefined, ""].includes(testValue)) {
       filVal.push(testValue);
       filVal.sort();
     }
@@ -83,7 +83,7 @@ class SideBar extends Component {
     for (let x of Object.keys(this.props.chosenFilters)) {
       filters[x] = [];
     }
-
+    console.log(filters);
     this.setState({
       filters,
     }, () => this.createFilterArrays(this.props.displayArray));
@@ -154,7 +154,7 @@ class SideBar extends Component {
   render() {
     return (
       <div className="queryContainer">
-          <form>
+          <form className="searchForm">
             <input
               type="text"
               id="searchBox"
@@ -163,10 +163,10 @@ class SideBar extends Component {
               onChange={this.searchHandler}
               className="searchBox"
             />
-            <button className="sideBarSearchBtn" onClick={this.returnSearchValue}>
+            <button className="sideBarBtn" onClick={this.returnSearchValue}>
               Search
             </button>
-            <button className="sideBarSearchBtn" onClick={this.clearSearch}>
+            <button className="sideBarBtn" onClick={this.clearSearch}>
               clear
             </button>
           </form>
@@ -186,11 +186,12 @@ class SideBar extends Component {
                 );
               })
             }
-            <button className="sideBarSearchBtn" onClick={this.clearFilters}>
+            <button className="sideBarBtn" onClick={this.clearFilters}>
               clear
             </button>
-
-            <label className="sortByContainer">Sort By</label>
+          </form>
+          <form className="sortByContainer">
+            <label>Sort By</label>
             <select id="sortBy" name="sortBy" onChange={this.sortHandler}>
               <option value=""></option>
               {
@@ -200,6 +201,7 @@ class SideBar extends Component {
               }
             </select>
           </form>
+
           <ListSelection user={ this.props.user }/>
       </div>
     );

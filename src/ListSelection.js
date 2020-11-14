@@ -22,7 +22,7 @@ class ListSelection extends Component {
         userInfo.on("value", (snapshot) => {
           if (snapshot.val() != null) {
           const userLists = Object.keys(snapshot.val());
-    
+          
           this.setState({
             userLists,
             user
@@ -51,7 +51,8 @@ class ListSelection extends Component {
       : alert("List with that name already exists")
 
     this.setState({
-      showList: false
+      showList: false,
+      listName: ""
     })
   }
 
@@ -69,11 +70,13 @@ class ListSelection extends Component {
 
   render() {
     return (
-      <div>
+      <div className="userListContainer">
         <h2>User Lists</h2>
         {
         (this.props.user && !this.state.showList) 
-        ? <button onClick={() => this.setState({showList: true})} > Create New List </button>
+        ? <button onClick={() => this.setState({showList: true})} 
+          className="clearButton">
+          Create New List </button>
         : null
         }
         {
@@ -84,7 +87,7 @@ class ListSelection extends Component {
               <input id="listName" 
                 type="text" placeholder="enter list name" 
                 value={this.state.listName} onChange={this.listNameHandler} required/>
-              <button type="submit" onClick={this.createList}> Create</button>
+              <button className="clearButton" type="submit" onClick={this.createList}> Create</button>
             </form>
           </div>
         : null
@@ -100,12 +103,12 @@ class ListSelection extends Component {
                 <p>{list}</p>
                 </Link>
                 <button
+                  aria-label={`delete ${list} list`}
                   className="listDelete"
                   onClick={() => {
                     this.removeList(list);
                   }}
-                >X
-                </button>
+                >X</button>
               </li>
             );
           })}
