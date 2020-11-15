@@ -1,16 +1,14 @@
 //Side Bar Styles
-.showGeneratorContainerExpanded {
+.showGeneratorContainerExpanded,
+.showGeneratorContainerContracted {
 	display: grid;
 	grid-template-columns: 135px 1fr;
 	background-color: $secondaryBackground;
-	min-height: 85vh
+	min-height: 85vh;
 }
 
 .showGeneratorContainerContracted {
-	display: grid;
 	grid-template-columns: 50px 1fr;
-	background-color: $secondaryBackground;
-	min-height: 85vh
 }
 
 .searchBox {
@@ -54,12 +52,13 @@
 
 .queryContainer {
 	position: sticky;
-	top: 100px;
-	padding: 0 10px;
+	top: 60px;
+	padding: 0 5px;
 	display: grid;
 	align-content: flex-start;
 	min-height: calc(85vh - 15px);
 	grid-gap: 20px;
+	padding: 0px 10px;
 
 	input,
 	select {
@@ -69,7 +68,6 @@
 
 .criteriaContainer {
 	display: grid;
-	margin-bottom: 20px;
 
 	label {
 		margin-top: 5px;
@@ -100,29 +98,33 @@
 	cursor: pointer;
 }
 
-.expandArrow {
-	max-height: 50px;
-	width: 100%;
-	position: sticky;
-	top: 10px;
-}
-
+.expandArrow,
 .expandContainer {
 	position: sticky;
 	top: 10px;
 }
 
+.expandArrow {
+	max-height: 50px;
+	width: 100%;
+}
+
+.sidebarContracted,
+.sidebarExpanded {
+	background-color: $secondaryBackground;
+}
+
 .sidebarContracted {
 	max-width: 75px;
-	background-color: $secondaryBackground;
 	min-height: 90vh;
+	transition: .33s ease;
 }
 
 .sidebarExpanded {
-	max-width: 150px;
+	max-width: 175px;
 	padding-top: 10px;
-	background-color: $secondaryBackground;
-	min-height: calc(85vh - 15px);
+	min-height: calc(80vh - 15px);
+	transition: .33s ease;
 }
 
 .userListContainer {
@@ -130,29 +132,40 @@
 	flex-direction: column;
 	align-items: center;
 
-		ul {
-			max-width: 125px;
-			margin-top: 20px;
-			max-height: 20vh;
-			overflow-y: scroll;
-		}
+	ul {
+		max-width: 140px;
+		margin-top: 20px;
+		max-height: 25vh;
+		overflow-y: scroll;
 
-		li {
-			display: grid;
-			grid-template-columns: auto auto;
-			justify-content: space-between;
-			align-items: center;
-			margin: 5px 0;
-		}
+		scrollbar-width: thin;
+		scrollbar-color: $primaryBackground transparent;
+		scroll-margin-left: 10px;
+		padding-right: 3px;
+	}
 
-		h2 {
-			@include fontSize(12);
-		}
+	li {
+		display: grid;
+		grid-template-columns: auto auto;
+		justify-content: space-between;
+		align-items: center;
+		margin: 5px 0;
+	}
 
-		p {
-			@include fontSize(10);
-			max-width: 100px;
-			word-wrap: break-word;
-			margin: 2px 0;
-		}
+	h2 {
+		@include fontSize(12);
+	}
+
+	p {
+		@include fontSize(10);
+		max-width: 90px;
+		word-wrap: break-word;
+		margin: 2px 0;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 }

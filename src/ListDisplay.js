@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
+import NoImageAvailableLarge from "./images/noImgAvail.jpg";
 import ListSelection from "./ListSelection";
 import firebase from "./firebase";
 import "firebase/auth";
@@ -27,11 +27,12 @@ class ListDisplay extends Component {
 				const list = this.state.location
 				const listInfo = firebase.database().ref().child(user).child(list);
 				listInfo.on("value", (snapshot) => {
+					if(snapshot.val() !== null){
 					let displayArray = Object.values(snapshot.val());
 
 					this.setState({
 						displayArray
-					})
+					})}
 				})
 			}
 		})
@@ -60,7 +61,7 @@ class ListDisplay extends Component {
 												pathname: `/show/${each.id}`,
 												movieID: each
 											}}>
-												<img
+												<img className="cardImg"
 													src={each?.image?.medium ?? NoImageAvailableLarge}
 													alt={each.name}
 												/>

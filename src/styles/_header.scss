@@ -30,11 +30,11 @@ header {
     text-transform: uppercase;
     width: 100px;
     height: 40px;
-}
 
-.createListBtn:hover{
-    background: $primaryWhite;
-    color: $primaryAccent;
+    &:hover {
+        background: $primaryWhite;
+        color: $primaryAccent;
+    }
 }
 
 .loggedIn {

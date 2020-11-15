@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
+import NoImageAvailableLarge from "./images/noImgAvail.jpg";
 import firebase from "./firebase";
 import "firebase/auth";
 

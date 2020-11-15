@@ -1,0 +1,67 @@
+.signIn {
+  max-width: 60vw;
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-rows: repeat(auto-fill, auto);
+  margin-top: 10vh;
+  border: 2px solid $primaryWhite;
+  border-radius: 10px;
+  padding: 20px;
+  grid-gap: 10px;
+
+  button {
+    @include fontSize(8);
+    width: 75%;
+    background: $primaryAccent;
+    border: 1px solid $primaryBlack;
+    color: $primaryBackground;
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 26px;
+    font-family: $primaryFont;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 5px;
+  
+    &:hover,
+    &:focus {
+      background: $primaryWhite;
+      color: $primaryAccent;
+    }
+  }
+
+  label {
+    @include fontSize(10);
+  }
+}
+
+.authGrid {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, auto);
+  grid-gap: 10px;
+
+  form {
+    @include fontSize(10);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, auto);
+    align-items: center;
+    grid-gap: 5px;
+  }
+
+  p {
+    @include fontSize(10);
+
+    a:hover,
+    a:focus {
+      color: $primaryAccent;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .signIn {
+    max-width: 80vw;
+  }
+}

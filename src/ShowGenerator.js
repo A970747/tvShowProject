@@ -4,7 +4,7 @@ import AuthContext from "./AuthContext";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import "./styles/styles.scss";
-import NoImageAvailableLarge from "./images/NoImageAvailableLarge.jpg";
+import NoImageAvailableLarge from "./images/noImgAvail.jpg";
 import ArrowLeft from "./images/angle-left-solid.svg";
 import ArrowRight from "./images/angle-double-right-solid.svg";
 

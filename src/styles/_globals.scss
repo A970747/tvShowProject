@@ -16,10 +16,14 @@ a {
     color: black;
 }
 
+h2 {
+    margin: 1px;
+}
+
 h4 {
     @include fontSize(8);
 }
 
-.App {
-    min-height: 100vh;
+button{
+    cursor: pointer;
 }

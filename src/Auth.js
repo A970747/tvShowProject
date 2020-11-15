@@ -85,9 +85,9 @@ class SignIn extends Component {
   render() {
     const { setUser } = this.context;
     return (
-      <div>
+      <div className="signIn">
         {this.ifSignedIn()} 
-        <div>
+        <div className="authGrid">
           <form action="">
           <label for="useremail">User E-mail:</label>
           <input type="email" id="useremail" name="useremail" value={this.state.email} onChange={this.handleUserEmail} required/>

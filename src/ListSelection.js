@@ -46,14 +46,19 @@ class ListSelection extends Component {
 
   createList = (event) => {
     event.preventDefault();
-    (!this.state.userLists.includes(this.state.listName))
-      ? firebase.database().ref().child(firebase.auth().currentUser.uid).update({[this.state.listName]: 0})
-      : alert("List with that name already exists")
+    if(this.state.listName !== ""){
+      (!this.state.userLists.includes(this.state.listName))
+        ? firebase.database().ref().child(firebase.auth().currentUser.uid).update({[this.state.listName]: 0})
+        : alert("List with that name already exists")
 
-    this.setState({
-      showList: false,
-      listName: ""
-    })
+      this.setState({
+        showList: false,
+        listName: ""
+      })
+    }
+    else {
+      alert("List name required");
+    }
   }
 
   removeList(list) {
@@ -71,17 +76,21 @@ class ListSelection extends Component {
   render() {
     return (
       <div className="userListContainer">
-        <h2>User Lists</h2>
+        {
+          (this.props.user)
+          ? <h2>User Lists</h2>
+          : <></>  
+        }
         {
         (this.props.user && !this.state.showList) 
         ? <button onClick={() => this.setState({showList: true})} 
-          className="clearButton">
+          className="clearButton" >
           Create New List </button>
         : null
         }
         {
         (this.state.showList) 
-        ? <div>
+        ? <div className="userListContainer">
             <form>
               <label for="listName" className="languageContainer sr-only">Create User List</label>
               <input id="listName" 
