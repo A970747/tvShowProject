@@ -20,11 +20,11 @@ class SideBar extends Component {
 
   createFilterArrays = (response) => {
     Array.from(Object.keys(this.props.chosenFilters)).forEach(filter => {
-      this.searchTree(filter, response);
+      this.checkObject(filter, response);
     });
   }
 
-  searchTree = (filterValue, searchObject) => {
+  checkObject = (filterValue, searchObject) => {
     if (Object.keys(searchObject).includes(filterValue)) {
       this.testUniqueValues(filterValue, searchObject[filterValue])
     }
@@ -34,7 +34,7 @@ class SideBar extends Component {
         if (value) return true;
       }).forEach(item => {
         if (Array.isArray(item) || Object.prototype.toString(item).slice(8, -1) === "Object")
-          this.searchTree(filterValue, item)
+          this.checkObject(filterValue, item)
       })
     }
   }
@@ -83,7 +83,7 @@ class SideBar extends Component {
     for (let x of Object.keys(this.props.chosenFilters)) {
       filters[x] = [];
     }
-    console.log(filters);
+    
     this.setState({
       filters,
     }, () => this.createFilterArrays(this.props.displayArray));
@@ -201,7 +201,6 @@ class SideBar extends Component {
               }
             </select>
           </form>
-
           <ListSelection user={ this.props.user }/>
       </div>
     );

@@ -12,6 +12,7 @@ class ShowGenerator extends Component {
   constructor() {
     super();
     this.state = {
+      searches: 0,
       displaySidebar: true,
       query: "",
       chosenFilters: {
@@ -51,12 +52,21 @@ class ShowGenerator extends Component {
   }
 
   apiSearch() {
+    let searches = {...this.state.searches} + 1
+    this.setState({
+      searches 
+    })
+
+    if(this.state.searches === 0) {
+      const storedDisplay = [...this.state.displayArray];
+      this.setState({
+        storedDisplay
+      })
+    }
+
     axios({ url: `http://api.tvmaze.com/search/shows?q=${this.state.query}`})
       .then((response) => {
-        const storedDisplay = [...this.state.displayArray];
-
         this.setState({
-          storedDisplay,
           displayArray: response.data.map(each => each.show),
         }, () => this.updateFilters());
     });
@@ -132,8 +142,8 @@ class ShowGenerator extends Component {
 
     this.setState(
       {
+        searches: 0,
         displayArray,
-        //query: searchValue,
       });
   }
 
@@ -145,7 +155,7 @@ class ShowGenerator extends Component {
     });
   }
 
-  searchTree = (filterKey, filterValue, searchObject) => {
+  checkObject = (filterKey, filterValue, searchObject) => {
     if (Object.keys(searchObject).includes(filterKey)) {
       return this.checkValues(filterValue, searchObject[filterKey], filterKey)
     } else {
@@ -154,7 +164,7 @@ class ShowGenerator extends Component {
         if (value) return true
       }).forEach(item => {
         if (Array.isArray(item) || Object.prototype.toString(item).slice(8, -1) === "Object")
-          this.searchTree(filterKey, filterValue, item)
+          this.checkObject(filterKey, filterValue, item)
       })
     }
   }
@@ -195,10 +205,10 @@ class ShowGenerator extends Component {
     };
 
   filterData = () => {
-    let data = [...this.state.storedDisplay];
+    let data = [...this.state.displayArray];
     const filterObj = {...this.state.filterArray};
     for(let [key, value] of Object.entries(filterObj))  {
-      data = data.filter( data => this.searchTree(key, value, data));
+      data = data.filter( data => this.checkObject(key, value, data));
     }
 
     this.setState({

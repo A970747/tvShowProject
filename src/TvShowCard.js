@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NoImageAvailableLarge from "./images/noImgAvail.jpg";
+import { Link } from "react-router-dom";
 import firebase from "./firebase";
 import "firebase/auth";
 
@@ -27,9 +28,20 @@ class TvShowCard extends Component {
 
   addShowToList = (event) => {
     event.preventDefault();
-    const user = firebase.auth().currentUser.uid
-    const id = this.props.location.movieID.id
-    firebase.database().ref().child(user).child(this.state.listID).update({[`${id}`]: this.props.location.movieID});
+
+    if([null, undefined, ""].includes(this.state.listID)) {
+      console.log(this.state.listID)
+    }
+    else {
+      const user = firebase.auth().currentUser.uid
+      const id = this.props.location.movieID.id
+      firebase.database().ref().child(user).child(this.state.listID).update({[`${id}`]: this.props.location.movieID});
+      alert(`Show added to ${this.state.listID}`)
+
+      this.setState({
+        listID: ''
+      })
+    }
   }
 
   setUserList = (event) => {
@@ -50,36 +62,36 @@ class TvShowCard extends Component {
             <div className="showCardContent">
               <h1 className="showTitle">{showInfo.name}</h1>
               <ul>
-                <li>{showInfo.network && showInfo.network.name}</li>
-                <li>{showInfo.country}</li>
-                <li>{showInfo.genres}</li>
-                <li>
-                  {showInfo.summary && showInfo.summary.replace(/(<([^>]+)>)/gi, "")}
-                </li>
+                <li>{showInfo?.network?.name}</li>
+                <li>{showInfo.genres.map(each=>`${each} `)}</li>
+                <li>{showInfo.summary.replace(/(<([^>]+)>)/gi, "")}</li>
               </ul>
             {
               (firebase.auth().currentUser)
               ? <>
                   <form>
-                    <label className="languageContainer">Add show to list</label>
+                    <label className="languageContainer">Add show to list </label>
                     <select id="changethis" name="changethis" value={this.state.listID} onChange={this.setUserList}>
                       <option></option>
                       {this.state.userLists.map((each) => {
                         return <option>{each}</option>;
                       })}
                     </select>
-                    <button type="submit" onClick={this.addShowToList}>Add</button>
+                    <button className="addButton" type="submit" onClick={this.addShowToList}>Add</button>
                   </form>
                 </>
               : <></>
             }
+            <Link to="/">
+              <button className="backButton">back</button>
+            </Link>
             </div>
 
-          <img
-            src={showInfo?.image?.medium || NoImageAvailableLarge}
-            alt={showInfo.name}
-            className="tvShowCardImg"
-          />
+            <img
+              src={showInfo?.image?.medium || NoImageAvailableLarge}
+              alt={showInfo.name}
+              className="tvShowCardImg"
+            />
           </div>
         </>
         : null

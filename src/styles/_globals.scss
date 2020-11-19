@@ -16,7 +16,9 @@ a {
     color: black;
 }
 
-h2 {
+h2,
+h3 {
+    @include fontSize(12);
     margin: 1px;
 }
 

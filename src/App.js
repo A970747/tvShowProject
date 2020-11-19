@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ShowGenerator from "./ShowGenerator";
 import TvShowCard from "./TvShowCard";
 import SignIn from "./SignIn";
@@ -18,7 +18,9 @@ class App extends Component {
         <div className="App">
           <AuthProvider>
             <header>
-              <h1 className="mainTitle"> show search</h1>
+              <Link to="/">
+                <h1 className="mainTitle"> show search</h1>
+              </Link>
               <SignIn />
             </header>
             <Route path="/Auth" component={Auth} />

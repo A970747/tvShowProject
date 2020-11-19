@@ -2,32 +2,49 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 100%;
-    width: 100%;
-/*     display: flex;
-    width: 90%;
-    margin: 0 auto;
-    justify-content: space-around;
-    padding: 10%;
-    padding-bottom: 10px; */
+    flex-flow: wrap;
+    max-width: 90%;
+    border-radius: 8px;
+    border: 5px solid $primaryWhite;
+    margin: 25px auto;
 
     img {
-      width: 100%;
+      max-width: 250px;
+      flex: 1 1 50%;
+      padding: 10px;
+      border-radius: 15px;
     }   
   }
   
   .showCardContent {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 5%;
-    border: 5px solid $primaryWhite;
     margin: 5px;
-    border-radius: 8px;
+    flex: 1 1 50%;
 
     ul {
       li {
         padding-bottom: 15px;
         font-size: 1rem;
+      }
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      flex-flow: wrap;
+      max-width: 100%;
+      
+      label {
+        text-align: center;
+        flex-basis: 100%;
+      }
+
+      select {
+        margin: 5px;
       }
     }
   }
@@ -44,25 +61,30 @@
     align-items: center;
   }
 
-  .addToListBtn {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    background: $primaryAccent;
-    border: 2px solid black;
-    color: $primaryBackground;
-    border-radius: 4px;
-    padding: 5px;
-    font-size: 0.6rem;
-    margin-bottom: 15px;
-    height: 26px;
-    font-family: $primaryFont;
-    font-weight: 700;
-    text-transform: uppercase;
-    height: 40px;
-  }
-
   .cardImg {
     border-radius: 5px 5px 0 0;
     border-bottom: 1px solid $secondaryBackground;
+  }
+
+  .backButton,
+  .addButton {
+  @include fontSize(8);
+  margin: 5px 5px;
+	background: $primaryAccent;
+	border: 1px solid $primaryBlack;
+	color: $primaryBackground;
+	border-radius: 5px;
+	min-height: 26px;
+	font-family: $primaryFont;
+	font-weight: 700;
+	text-transform: uppercase;
+
+		&:hover{
+			background: $primaryWhite;
+			color: $primaryAccent;
+		}
+}
+
+  .backButton {
+    margin-top: 10px;
   }

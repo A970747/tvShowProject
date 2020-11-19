@@ -41,12 +41,18 @@ class ListDisplay extends Component {
 	render() {
 		return (
 			<>
-				<div className="showGeneratorContainer">
-					<div className="sideBarContainer">
+				<div className="listDisplayHeader">
+					<h2>{this.state.location}</h2>
+				</div>			
+				<div className="listDisplay">
+					<div className="listDisplaySidebar">
+						<h3>UserLists</h3>
 						<ListSelection />
+						<Link to="/">
+							<button className="backButton">back</button>
+						</Link>
 					</div>
 					<div className="cardDisplayContainer">
-						<h2>{this.state.location}</h2>
 						{
 							this.state.displayArray.length !== 0
 								? (this.state.displayArray.map((each) => {

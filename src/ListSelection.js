@@ -78,7 +78,7 @@ class ListSelection extends Component {
       <div className="userListContainer">
         {
           (this.props.user)
-          ? <h2>User Lists</h2>
+          ? <h3>User Lists</h3>
           : <></>  
         }
         {
