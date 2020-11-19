@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/showsearch/static/css/main.174be43a.chunk.css",
+    "main.js": "/showsearch/static/js/main.66cabec7.chunk.js",
+    "main.js.map": "/showsearch/static/js/main.66cabec7.chunk.js.map",
+    "runtime-main.js": "/showsearch/static/js/runtime-main.813693d4.js",
+    "runtime-main.js.map": "/showsearch/static/js/runtime-main.813693d4.js.map",
+    "static/js/2.add5249a.chunk.js": "/showsearch/static/js/2.add5249a.chunk.js",
+    "static/js/2.add5249a.chunk.js.map": "/showsearch/static/js/2.add5249a.chunk.js.map",
+    "index.html": "/showsearch/index.html",
+    "precache-manifest.04caa7011ba73dfdf02f7e7e477f3cb5.js": "/showsearch/precache-manifest.04caa7011ba73dfdf02f7e7e477f3cb5.js",
+    "service-worker.js": "/showsearch/service-worker.js",
+    "static/css/main.174be43a.chunk.css.map": "/showsearch/static/css/main.174be43a.chunk.css.map",
+    "static/js/2.add5249a.chunk.js.LICENSE.txt": "/showsearch/static/js/2.add5249a.chunk.js.LICENSE.txt",
+    "static/media/angle-double-right-solid.svg": "/showsearch/static/media/angle-double-right-solid.5665ebcc.svg",
+    "static/media/angle-left-solid.svg": "/showsearch/static/media/angle-left-solid.8f1f7293.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.813693d4.js",
+    "static/js/2.add5249a.chunk.js",
+    "static/css/main.174be43a.chunk.css",
+    "static/js/main.66cabec7.chunk.js"
+  ]
+}
