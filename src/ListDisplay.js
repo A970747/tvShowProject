@@ -9,6 +9,7 @@ class ListDisplay extends Component {
 	constructor() {
 		super();
 		this.state = {
+			user: "",
 			location: "",
 			displayArray: ""
 		};
@@ -16,7 +17,8 @@ class ListDisplay extends Component {
 
 	componentWillMount() {
 		this.setState({
-			location: this.props.match.params.listid
+			location: this.props.match.params.listid,
+			user: this.props.match.params.user
 		})
 	}
 
@@ -43,15 +45,11 @@ class ListDisplay extends Component {
 			<>
 				<div className="listDisplayHeader">
 					<h2>{this.state.location}</h2>
+					<Link to="/">
+							<button className="backButton">back</button>
+					</Link>
 				</div>			
 				<div className="listDisplay">
-					<div className="listDisplaySidebar">
-						<h3>UserLists</h3>
-						<ListSelection />
-						<Link to="/">
-							<button className="backButton">back</button>
-						</Link>
-					</div>
 					<div className="cardDisplayContainer">
 						{
 							this.state.displayArray.length !== 0

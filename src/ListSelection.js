@@ -107,7 +107,8 @@ class ListSelection extends Component {
               <li key={list}>
                 <Link to={{
                   pathname:`/list/${list}`,
-                  listID: list
+                  listID: list,
+                  user: this.state.user
                   }}>
                 <p>{list}</p>
                 </Link>

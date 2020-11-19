@@ -3,29 +3,19 @@
   height: 5vh;
   justify-content: center;
   align-items: center;
+  align-content: center;
   color: $primaryWhite;
   border-bottom: 3px solid $primaryBackground;
   text-transform: capitalize;
+
+  a {
+    margin-left: 10px;
+  }
 }
 
 .listDisplay {
 	display: grid;
-  grid-template-columns: 135px 1fr;
+  grid-template-columns: 1fr;
 	background-color: $secondaryBackground;
   min-height: 85vh;
-}
-
-.listDisplaySidebar {
-  display: grid;
-  height: 100%;
-  align-content: flex-start;
-  justify-items: center;
-	max-width: 175px;
-	padding-top: 10px;
-	min-height: calc(80vh - 15px);
-  transition: .33s ease;
-  
-  .backButton {
-    align-self: center;
-  }
 }
