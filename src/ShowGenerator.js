@@ -36,16 +36,29 @@ class ShowGenerator extends Component {
   //apiHandler handles the axios calls and returns an array of results by default
   //it will also be called anytime query is updated from the search bar, and
   // all results returned dynamically, of course.
-  //http://api.tvmaze.com/shows?page=1
 
     //when page loads, fire the api to get some results immediately
   componentDidMount() {
     this.setDefault();
   }
 
+  async setDefault() {
+    const response = await this.apiGeneral();
+    const displayArray = [...this.state.displayArray];
+    if(displayArray.length === 0) {
+      response.forEach((each, index) => { if(index < 33) displayArray.push(each)})
+    }
+    let storedDisplay = displayArray;
+
+    this.setState({
+      displayArray,
+      storedDisplay,
+    }, () => this.updateFilters());
+  }
+
   async apiGeneral(page = 0) {
     let response = await axios({
-      url: `http://api.tvmaze.com/shows?page=${page}`,
+      url: `https://api.tvmaze.com/shows?page=${page}`,
     })
     this.makeCache(response);
     return response.data;
@@ -64,26 +77,12 @@ class ShowGenerator extends Component {
       })
     }
 
-    axios({ url: `http://api.tvmaze.com/search/shows?q=${this.state.query}`})
+    axios({ url: `https://api.tvmaze.com/search/shows?q=${this.state.query}`})
       .then((response) => {
         this.setState({
           displayArray: response.data.map(each => each.show),
         }, () => this.updateFilters());
     });
-  }
-
-  async setDefault() {
-    const response = await this.apiGeneral();
-    const displayArray = [...this.state.displayArray];
-    if(displayArray.length === 0) {
-      response.forEach((each, index) => { if(index < 33) displayArray.push(each)})
-    }
-    let storedDisplay = displayArray;
-
-    this.setState({
-      displayArray,
-      storedDisplay,
-    }, () => this.updateFilters());
   }
 
   makeCache = (data) => {

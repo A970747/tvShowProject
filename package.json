@@ -2,7 +2,7 @@
   "name": "tv-show-superlative",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://piePepper.github.io/tvShowSuperlative",
+  "homepage": "https://mattjackson.dev/showsearch/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
